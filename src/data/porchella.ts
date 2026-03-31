@@ -751,31 +751,31 @@ export const amenities: Amenity[] = [
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45640, 37.58835],
-    label: "Restroom — Nottoway Ave",
+    coordinates: [-77.45780, 37.58820],
+    label: "Restroom — Nottoway near MacArthur",
   },
   {
     id: "potty-2",
     type: "porta-potty",
-    coordinates: [-77.45020, 37.59180],
+    coordinates: [-77.45268, 37.59203],
     label: "Restroom — Stanhope near Brook Rd",
   },
   {
     id: "potty-3",
     type: "porta-potty",
-    coordinates: [-77.45360, 37.58640],
+    coordinates: [-77.45585, 37.58623],
     label: "Restroom — Greycourt near Newport",
   },
   {
     id: "potty-4",
     type: "porta-potty",
-    coordinates: [-77.46150, 37.58850],
+    coordinates: [-77.46155, 37.58950],
     label: "Restroom — Mount Vernon",
   },
   {
     id: "potty-5",
     type: "porta-potty",
-    coordinates: [-77.45490, 37.59300],
+    coordinates: [-77.45690, 37.59340],
     label: "Restroom — Westminster/Windsor",
   },
   // Merch / Info
