@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X } from "lucide-react";
+import { Search, X, Heart, Eye } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { getAllGenres } from "@/data/porchella";
 
@@ -9,6 +9,11 @@ type FilterBarProps = {
   onSearchChange: (q: string) => void;
   selectedGenre: string | null;
   onGenreChange: (genre: string | null) => void;
+  showFavorites: boolean;
+  onToggleFavorites: () => void;
+  favoritesCount: number;
+  showAllVenues: boolean;
+  onToggleAllVenues: () => void;
   resultCount: number;
 };
 
@@ -19,6 +24,11 @@ export function FilterBar({
   onSearchChange,
   selectedGenre,
   onGenreChange,
+  showFavorites,
+  onToggleFavorites,
+  favoritesCount,
+  showAllVenues,
+  onToggleAllVenues,
   resultCount,
 }: FilterBarProps) {
   return (
@@ -57,6 +67,33 @@ export function FilterBar({
             </option>
           ))}
         </select>
+      </div>
+      {/* Quick toggles */}
+      <div className="flex gap-2">
+        <button
+          onClick={onToggleFavorites}
+          aria-label={showFavorites ? "Show all bands" : "Show only favorites"}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            showFavorites
+              ? "bg-pink-500/15 text-pink-600 dark:text-pink-400 border border-pink-500/30"
+              : "bg-secondary text-secondary-foreground hover:bg-accent"
+          }`}
+        >
+          <Heart className={`h-3 w-3 ${showFavorites ? "fill-current" : ""}`} />
+          Favorites{favoritesCount > 0 ? ` (${favoritesCount})` : ""}
+        </button>
+        <button
+          onClick={onToggleAllVenues}
+          aria-label={showAllVenues ? "Show current time slot" : "Show all time slots on map"}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            showAllVenues
+              ? "bg-primary/15 text-primary border border-primary/30"
+              : "bg-secondary text-secondary-foreground hover:bg-accent"
+          }`}
+        >
+          <Eye className="h-3 w-3" />
+          All shows
+        </button>
       </div>
       <div className="sr-only" role="status" aria-live="polite">
         {resultCount} {resultCount === 1 ? "band" : "bands"} found

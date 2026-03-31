@@ -1,11 +1,11 @@
 "use client";
 
-import { UtensilsCrossed, Bath, ShoppingBag, Info } from "lucide-react";
+import { UtensilsCrossed, Toilet, ShoppingBag, Info } from "lucide-react";
 import type { AmenityType } from "@/data/porchella";
 
 const icons: Record<AmenityType, typeof UtensilsCrossed> = {
   "food-truck": UtensilsCrossed,
-  "porta-potty": Bath,
+  "porta-potty": Toilet,
   merch: ShoppingBag,
   info: Info,
 };

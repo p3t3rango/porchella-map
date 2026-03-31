@@ -45,12 +45,25 @@ const MAP_STYLES = {
   dark: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
 };
 
+// Time slot colors for "all shows" view
+const SLOT_COLORS: Record<string, string> = {
+  "12:00": "#ef4444", // red
+  "12:30": "#f97316", // orange
+  "1:15": "#eab308",  // yellow
+  "2:00": "#22c55e",  // green
+  "2:45": "#06b6d4",  // cyan
+  "3:30": "#3b82f6",  // blue
+  "4:15": "#8b5cf6",  // violet
+  "5:10": "#ec4899",  // pink
+};
+
 type PorchellaMapProps = {
   activeSlot: TimeSlot;
   selectedPerformance: Performance | null;
   onSelectPerformance: (perf: Performance | null) => void;
   filteredBandIds: Set<string> | null;
   isDark?: boolean;
+  showAllVenues?: boolean;
 };
 
 export function PorchellaMap({
@@ -59,6 +72,7 @@ export function PorchellaMap({
   onSelectPerformance,
   filteredBandIds,
   isDark = false,
+  showAllVenues = false,
 }: PorchellaMapProps) {
   const mapRef = useRef<MapRef>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -68,11 +82,11 @@ export function PorchellaMap({
 
   const activePerformances = useMemo(() => {
     return performances.filter((p) => {
-      if (p.timeSlot !== activeSlot) return false;
+      if (!showAllVenues && p.timeSlot !== activeSlot) return false;
       if (filteredBandIds && !filteredBandIds.has(p.bandId)) return false;
       return true;
     });
-  }, [activeSlot, filteredBandIds]);
+  }, [activeSlot, filteredBandIds, showAllVenues]);
 
   const activeVenueIds = useMemo(
     () => new Set(activePerformances.map((p) => p.venueId)),
@@ -149,9 +163,14 @@ export function PorchellaMap({
 
           if (!isActive && !isSelected) return null;
 
+          // In all-shows mode, color by time slot
+          const slotColor = showAllVenues && perf
+            ? SLOT_COLORS[perf.timeSlot]
+            : undefined;
+
           return (
             <Marker
-              key={venue.id}
+              key={`${venue.id}-${perf?.timeSlot ?? ""}`}
               longitude={venue.coordinates[0]}
               latitude={venue.coordinates[1]}
               anchor="center"
@@ -161,6 +180,7 @@ export function PorchellaMap({
                 isSelected={isSelected}
                 bandName={band?.name ?? venue.address}
                 onClick={() => handleMarkerClick(venue.id)}
+                color={slotColor}
               />
             </Marker>
           );

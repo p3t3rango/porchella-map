@@ -17,6 +17,7 @@ import {
 import { TIME_SLOTS, getCurrentSlot, isEventDay, type TimeSlot } from "@/lib/time";
 import { Music, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useFavorites } from "@/lib/favorites";
 
 export default function Home() {
   // Time slot state — default to current slot on event day, else first slot
@@ -52,14 +53,22 @@ export default function Home() {
   // Filters
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [showAllVenues, setShowAllVenues] = useState(false);
+
+  // Favorites
+  const { favorites, toggleFavorite, isFavorite, count: favoritesCount } = useFavorites();
+
+  // Panel expand state (mobile only)
+  const [panelExpanded, setPanelExpanded] = useState(false);
 
   // Selection
   const [selectedPerformance, setSelectedPerformance] =
     useState<Performance | null>(null);
 
-  // Filtered band IDs based on search + genre
+  // Filtered band IDs based on search + genre + favorites
   const filteredBandIds = useMemo(() => {
-    if (!searchQuery && !selectedGenre) return null; // null = no filter
+    if (!searchQuery && !selectedGenre && !showFavorites) return null;
     const q = searchQuery.toLowerCase();
     const ids = new Set<string>();
     performances.forEach((p) => {
@@ -70,13 +79,14 @@ export default function Home() {
         band.name.toLowerCase().includes(q) ||
         band.genre.toLowerCase().includes(q);
       const matchesGenre = !selectedGenre || band.genre === selectedGenre;
-      if (matchesSearch && matchesGenre) ids.add(band.id);
+      const matchesFavorites = !showFavorites || favorites.has(band.id);
+      if (matchesSearch && matchesGenre && matchesFavorites) ids.add(band.id);
     });
     return ids;
-  }, [searchQuery, selectedGenre]);
+  }, [searchQuery, selectedGenre, showFavorites, favorites]);
 
-  // When filtering by genre or search, show across ALL time slots
-  const isFiltering = !!searchQuery || !!selectedGenre;
+  // Show across all time slots when filtering, favorites, or all-shows is active
+  const isFiltering = !!searchQuery || !!selectedGenre || showFavorites || showAllVenues;
 
   // Performances for the active slot (or all slots when filtering), filtered
   const slotPerformances = useMemo(() => {
@@ -91,7 +101,14 @@ export default function Home() {
         band: getBand(p.bandId)!,
         venue: getVenue(p.venueId)!,
       }))
-      .sort((a, b) => a.band.name.localeCompare(b.band.name));
+      .sort((a, b) => {
+        // When showing all, sort by time then name
+        if (isFiltering) {
+          const timeCompare = a.timeSlot.localeCompare(b.timeSlot);
+          if (timeCompare !== 0) return timeCompare;
+        }
+        return a.band.name.localeCompare(b.band.name);
+      });
   }, [activeSlot, filteredBandIds, isFiltering]);
 
   const handleSelectPerformance = useCallback(
@@ -110,17 +127,36 @@ export default function Home() {
 
   const panelContent = (
     <>
+      {/* Expand/collapse handle — mobile only */}
+      <button
+        onClick={() => setPanelExpanded((v) => !v)}
+        className="flex flex-col items-center gap-1 py-2 lg:hidden touch-manipulation"
+        aria-label={panelExpanded ? "Collapse band list" : "Expand band list"}
+      >
+        <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
+        <span className="text-[10px] text-muted-foreground">
+          {panelExpanded ? "Show map" : "Show more bands"}
+        </span>
+      </button>
       <TimeSelector
         activeSlot={activeSlot}
         currentSlot={currentSlot}
         onSelectSlot={setActiveSlot}
       />
-      <Legend />
+      {/* Legend — hidden on mobile to save space */}
+      <div className="hidden lg:block">
+        <Legend />
+      </div>
       <FilterBar
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         selectedGenre={selectedGenre}
         onGenreChange={setSelectedGenre}
+        showFavorites={showFavorites}
+        onToggleFavorites={() => setShowFavorites((v) => !v)}
+        favoritesCount={favoritesCount}
+        showAllVenues={showAllVenues}
+        onToggleAllVenues={() => setShowAllVenues((v) => !v)}
         resultCount={slotPerformances.length}
       />
 
@@ -148,6 +184,8 @@ export default function Home() {
                 venue={p.venue}
                 timeSlot={p.timeSlot}
                 isSelected={selectedPerformance?.bandId === p.bandId}
+                isFavorite={isFavorite(p.bandId)}
+                onToggleFavorite={() => toggleFavorite(p.bandId)}
                 onClick={() =>
                   handleSelectPerformance(
                     selectedPerformance?.bandId === p.bandId ? null : p
@@ -175,8 +213,6 @@ export default function Home() {
             </a>
           </span>
         ))}
-        <span className="mx-1">&middot;</span>
-        <span>Drinking in public violates VA Code 4.1-308</span>
       </footer>
     </>
   );
@@ -210,23 +246,30 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Desktop: side-by-side | Mobile: stacked */}
-      <div className="flex flex-1 flex-col lg:flex-row overflow-hidden">
-        {/* Map */}
-        <div className="relative min-h-[45vh] flex-1 lg:min-h-0">
-          <div className="absolute inset-0">
-            <PorchellaMap
-              activeSlot={activeSlot}
-              selectedPerformance={selectedPerformance}
-              onSelectPerformance={handleSelectPerformance}
-              filteredBandIds={filteredBandIds}
-              isDark={isDark}
-            />
-          </div>
+      {/* Desktop: side-by-side | Mobile: stacked with expandable panel */}
+      <div className="flex flex-1 flex-col lg:flex-row overflow-hidden relative">
+        {/* Map — always fills the space */}
+        <div className="absolute inset-0 lg:relative lg:flex-1">
+          <PorchellaMap
+            activeSlot={activeSlot}
+            selectedPerformance={selectedPerformance}
+            onSelectPerformance={handleSelectPerformance}
+            filteredBandIds={filteredBandIds}
+            isDark={isDark}
+            showAllVenues={showAllVenues}
+          />
         </div>
 
-        {/* Panel — bottom on mobile, right sidebar on desktop */}
-        <div className="flex max-h-[50vh] flex-col border-t lg:max-h-none lg:w-[400px] lg:border-t-0 lg:border-l overflow-hidden">
+        {/* Panel — overlays map on mobile, sidebar on desktop */}
+        <div
+          className={`
+            absolute bottom-0 left-0 right-0 z-10 flex flex-col
+            border-t bg-background/95 backdrop-blur-md
+            transition-[max-height] duration-300 ease-in-out
+            lg:relative lg:z-auto lg:max-h-none lg:w-[400px] lg:border-t-0 lg:border-l lg:bg-background lg:backdrop-blur-none
+            ${panelExpanded ? "max-h-[85vh]" : "max-h-[55vh]"}
+          `}
+        >
           {panelContent}
         </div>
       </div>
@@ -238,6 +281,8 @@ export default function Home() {
         timeSlot={selectedPerformance?.timeSlot ?? null}
         open={selectedPerformance !== null}
         onClose={() => handleSelectPerformance(null)}
+        isFavorite={selectedPerformance ? isFavorite(selectedPerformance.bandId) : false}
+        onToggleFavorite={selectedPerformance ? () => toggleFavorite(selectedPerformance.bandId) : undefined}
       />
     </div>
   );

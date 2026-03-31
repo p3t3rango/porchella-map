@@ -1,11 +1,11 @@
 "use client";
 
-import { Music, UtensilsCrossed, Bath, ShoppingBag, Minus } from "lucide-react";
+import { Music, UtensilsCrossed, Toilet, ShoppingBag, Minus } from "lucide-react";
 
 const items = [
   { icon: Music, label: "Active venue", color: "bg-primary text-primary-foreground" },
   { icon: UtensilsCrossed, label: "Food trucks", color: "bg-amber-500 text-white" },
-  { icon: Bath, label: "Restrooms", color: "bg-blue-500 text-white" },
+  { icon: Toilet, label: "Restrooms", color: "bg-blue-500 text-white" },
   { icon: ShoppingBag, label: "Merch / Info", color: "bg-pink-500 text-white" },
   { icon: Minus, label: "Street closure", color: "bg-red-400 text-white" },
 ];

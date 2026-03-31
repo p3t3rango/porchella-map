@@ -29,6 +29,8 @@ type BandDetailSheetProps = {
   timeSlot: TimeSlot | null;
   open: boolean;
   onClose: () => void;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
 };
 
 export function BandDetailSheet({
@@ -37,6 +39,8 @@ export function BandDetailSheet({
   timeSlot,
   open,
   onClose,
+  isFavorite = false,
+  onToggleFavorite,
 }: BandDetailSheetProps) {
   if (!band || !venue || !timeSlot) return null;
 
@@ -101,7 +105,24 @@ export function BandDetailSheet({
         )}
 
         <SheetHeader className="text-left">
-          <SheetTitle className="text-xl">{band.name}</SheetTitle>
+          <div className="flex items-center justify-between">
+            <SheetTitle className="text-xl">{band.name}</SheetTitle>
+            {onToggleFavorite && (
+              <button
+                onClick={onToggleFavorite}
+                aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                className="p-2 rounded-full hover:bg-accent transition-colors"
+              >
+                <Heart
+                  className={`h-5 w-5 transition-colors ${
+                    isFavorite
+                      ? "fill-pink-500 text-pink-500"
+                      : "text-muted-foreground hover:text-pink-400"
+                  }`}
+                />
+              </button>
+            )}
+          </div>
           <SheetDescription className="sr-only">
             Details for {band.name}
           </SheetDescription>
