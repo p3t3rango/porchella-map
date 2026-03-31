@@ -76,7 +76,7 @@ export const bands: Band[] = [
     description: "A community ensemble based in Richmond, VA, that plays traditional Japanese drums.",
     image: "/images/river-city-taiko.png",
     social: {
-      website: "http://www.flatbranchband.com",
+      website: "http://www.rivercitytaiko.com/home.html",
       facebook: "https://www.facebook.com/105360589634285",
     },
     tip: {},
