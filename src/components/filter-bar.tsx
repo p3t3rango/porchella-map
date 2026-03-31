@@ -51,7 +51,7 @@ export function FilterBar({
             placeholder="Search bands..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-8 h-9 text-sm"
+            className="pl-8 pr-8 h-9 text-sm"
             aria-label="Search bands by name or genre"
           />
           {searchQuery && (
