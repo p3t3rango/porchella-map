@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X, Heart, Eye } from "lucide-react";
+import { Search, X, Heart, Eye, Toilet, UtensilsCrossed } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { getAllGenres } from "@/data/porchella";
 
@@ -14,6 +14,10 @@ type FilterBarProps = {
   favoritesCount: number;
   showAllVenues: boolean;
   onToggleAllVenues: () => void;
+  showRestrooms: boolean;
+  onToggleRestrooms: () => void;
+  showFoodTrucks: boolean;
+  onToggleFoodTrucks: () => void;
   resultCount: number;
 };
 
@@ -29,6 +33,10 @@ export function FilterBar({
   favoritesCount,
   showAllVenues,
   onToggleAllVenues,
+  showRestrooms,
+  onToggleRestrooms,
+  showFoodTrucks,
+  onToggleFoodTrucks,
   resultCount,
 }: FilterBarProps) {
   return (
@@ -93,6 +101,30 @@ export function FilterBar({
         >
           <Eye className="h-3 w-3" />
           All shows
+        </button>
+        <button
+          onClick={onToggleRestrooms}
+          aria-label={showRestrooms ? "Hide restrooms on map" : "Show restrooms on map"}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            showRestrooms
+              ? "bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30"
+              : "bg-secondary text-secondary-foreground hover:bg-accent"
+          }`}
+        >
+          <Toilet className="h-3 w-3" />
+          Restrooms
+        </button>
+        <button
+          onClick={onToggleFoodTrucks}
+          aria-label={showFoodTrucks ? "Hide food trucks" : "Show food trucks"}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            showFoodTrucks
+              ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30"
+              : "bg-secondary text-secondary-foreground hover:bg-accent"
+          }`}
+        >
+          <UtensilsCrossed className="h-3 w-3" />
+          Food
         </button>
       </div>
       <div className="sr-only" role="status" aria-live="polite">

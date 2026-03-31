@@ -54,6 +54,10 @@ type PorchellaMapProps = {
   filteredBandIds: Set<string> | null;
   isDark?: boolean;
   showAllVenues?: boolean;
+  showFavorites?: boolean;
+  favorites?: Set<string>;
+  showRestrooms?: boolean;
+  showFoodTrucks?: boolean;
 };
 
 export function PorchellaMap({
@@ -63,6 +67,10 @@ export function PorchellaMap({
   filteredBandIds,
   isDark = false,
   showAllVenues = false,
+  showFavorites = false,
+  favorites,
+  showRestrooms = true,
+  showFoodTrucks = true,
 }: PorchellaMapProps) {
   const mapRef = useRef<MapRef>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -72,11 +80,21 @@ export function PorchellaMap({
 
   const activePerformances = useMemo(() => {
     return performances.filter((p) => {
-      if (!showAllVenues && p.timeSlot !== activeSlot) return false;
+      // All shows: show everything (filtered by search/genre if active)
+      if (showAllVenues) {
+        if (filteredBandIds && !filteredBandIds.has(p.bandId)) return false;
+        return true;
+      }
+      // Favorites: show only favorited bands across all slots
+      if (showFavorites && favorites) {
+        return favorites.has(p.bandId);
+      }
+      // Default: show only the active time slot
+      if (p.timeSlot !== activeSlot) return false;
       if (filteredBandIds && !filteredBandIds.has(p.bandId)) return false;
       return true;
     });
-  }, [activeSlot, filteredBandIds, showAllVenues]);
+  }, [activeSlot, filteredBandIds, showAllVenues, showFavorites, favorites]);
 
   const activeVenueIds = useMemo(
     () => new Set(activePerformances.map((p) => p.venueId)),
@@ -174,8 +192,14 @@ export function PorchellaMap({
           );
         })}
 
-        {/* Amenity markers */}
-        {amenities.map((amenity) => (
+        {/* Amenity markers — respect toggle states */}
+        {amenities
+          .filter((a) => {
+            if (a.type === "porta-potty" && !showRestrooms) return false;
+            if (a.type === "food-truck" && !showFoodTrucks) return false;
+            return true;
+          })
+          .map((amenity) => (
           <Marker
             key={amenity.id}
             longitude={amenity.coordinates[0]}

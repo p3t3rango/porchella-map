@@ -57,6 +57,8 @@ export default function Home() {
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
   const [showFavorites, setShowFavorites] = useState(false);
   const [showAllVenues, setShowAllVenues] = useState(false);
+  const [showRestrooms, setShowRestrooms] = useState(true);
+  const [showFoodTrucks, setShowFoodTrucks] = useState(true);
 
   // Favorites
   const { favorites, toggleFavorite, isFavorite, count: favoritesCount } = useFavorites();
@@ -146,6 +148,10 @@ export default function Home() {
         favoritesCount={favoritesCount}
         showAllVenues={showAllVenues}
         onToggleAllVenues={() => setShowAllVenues((v) => !v)}
+        showRestrooms={showRestrooms}
+        onToggleRestrooms={() => setShowRestrooms((v) => !v)}
+        showFoodTrucks={showFoodTrucks}
+        onToggleFoodTrucks={() => setShowFoodTrucks((v) => !v)}
         resultCount={slotPerformances.length}
       />
 
@@ -247,6 +253,10 @@ export default function Home() {
             filteredBandIds={filteredBandIds}
             isDark={isDark}
             showAllVenues={showAllVenues}
+            showFavorites={showFavorites}
+            favorites={favorites}
+            showRestrooms={showRestrooms}
+            showFoodTrucks={showFoodTrucks}
           />
         </div>
 

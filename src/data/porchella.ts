@@ -45,6 +45,13 @@ export type Amenity = {
   label: string;
 };
 
+export type FoodTruck = {
+  id: string;
+  name: string;
+  description?: string;
+  website?: string;
+};
+
 export type StreetClosure = {
   id: string;
   street: string;
@@ -745,6 +752,39 @@ export const amenities: Amenity[] = [
     type: "merch",
     coordinates: [-77.45650, 37.58897],
     label: "BCA Tent — Merch & Info",
+  },
+];
+
+// ─── Food Trucks ─────────────────────────────────────────────────────
+
+export const foodTrucks: FoodTruck[] = [
+  {
+    id: "1115-mobile-kitchen",
+    name: "1115 Mobile Kitchen",
+  },
+  {
+    id: "bikini-panini",
+    name: "Bikini Panini",
+  },
+  {
+    id: "boka-taco",
+    name: "Boka Taco",
+  },
+  {
+    id: "goatacado",
+    name: "Goatacado",
+  },
+  {
+    id: "moniques-crepes",
+    name: "Monique's Crepes",
+  },
+  {
+    id: "braise-n-smoke",
+    name: "Braise N'Smoke",
+  },
+  {
+    id: "westrays-finest",
+    name: "Westray's Finest",
   },
 ];
 
