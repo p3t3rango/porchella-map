@@ -460,7 +460,7 @@ export const venues: Venue[] = [
   // Fauquier Ave venues (runs roughly east-west)
   {
     id: "3815-fauquier",
-    address: "3815 Fauquier Ave",
+    address: "3813 Fauquier Ave",
     coordinates: [-77.45565, 37.58700],
     street: "Fauquier Ave",
   },
@@ -702,18 +702,18 @@ export const performances: Performance[] = [
 // ─── Amenities ───────────────────────────────────────────────────────
 
 export const amenities: Amenity[] = [
-  // Food trucks
+  // Food trucks — 2 locations from official flyer
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45583, 37.58975],
-    label: "Food Trucks — Fauquier near Claremont",
+    coordinates: [-77.45515, 37.58910],
+    label: "Food Trucks — Nottoway & Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45627, 37.58997],
-    label: "Food Trucks — Fauquier blocks",
+    coordinates: [-77.45580, 37.59200],
+    label: "Food Trucks — Claremont & Greycourt",
   },
   // Porta-potties
   {
@@ -761,30 +761,37 @@ export const foodTrucks: FoodTruck[] = [
   {
     id: "1115-mobile-kitchen",
     name: "1115 Mobile Kitchen",
+    website: "https://www.1115foodtruck.com/menu",
   },
   {
     id: "bikini-panini",
     name: "Bikini Panini",
+    website: "https://www.bikinipanini.com/",
   },
   {
     id: "boka-taco",
     name: "Boka Taco",
+    website: "https://static1.squarespace.com/static/599231fdc534a52a6efbcbad/t/63c84a872569f825a772c86e/1674070664200/2023+AYCE+TAKOS.pdf",
   },
   {
     id: "goatacado",
     name: "Goatacado",
+    website: "https://www.goatocado.com/menu",
   },
   {
     id: "moniques-crepes",
     name: "Monique's Crepes",
+    website: "https://moniquescrepes.com/menu-items/",
   },
   {
     id: "braise-n-smoke",
     name: "Braise N'Smoke",
+    website: "https://streetfoodfinder.com/BraiseNSmoke?tab=photos",
   },
   {
     id: "westrays-finest",
     name: "Westray's Finest",
+    website: "https://www.bestfoodtrucks.com/truck/westray-s-finest-ice-cream/menu",
   },
 ];
 
