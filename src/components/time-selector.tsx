@@ -3,6 +3,17 @@
 import { useRef, useEffect, useCallback } from "react";
 import { TIME_SLOTS, TIME_SLOT_LABELS, type TimeSlot } from "@/lib/time";
 
+const SLOT_COLORS: Record<TimeSlot, string> = {
+  "12:00": "#ef4444",
+  "12:30": "#f97316",
+  "1:15": "#eab308",
+  "2:00": "#22c55e",
+  "2:45": "#06b6d4",
+  "3:30": "#3b82f6",
+  "4:15": "#8b5cf6",
+  "5:10": "#ec4899",
+};
+
 type TimeSelectorProps = {
   activeSlot: TimeSlot;
   currentSlot: TimeSlot | null;
@@ -75,20 +86,27 @@ export function TimeSelector({
               onClick={() => onSelectSlot(slot)}
               className={`
                 relative flex-shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium
-                transition-colors duration-150
+                transition-all duration-150 flex items-center gap-1.5
                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
                 ${
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-sm"
+                    ? "text-white shadow-sm"
                     : "bg-secondary text-secondary-foreground hover:bg-accent"
                 }
               `}
+              style={isActive ? { backgroundColor: SLOT_COLORS[slot] } : undefined}
             >
               {isNow && (
                 <span className="absolute -top-1 -right-1 flex h-3 w-3">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500" />
                 </span>
+              )}
+              {!isActive && (
+                <span
+                  className="h-2 w-2 rounded-full flex-shrink-0"
+                  style={{ backgroundColor: SLOT_COLORS[slot] }}
+                />
               )}
               {TIME_SLOT_LABELS[slot]}
             </button>

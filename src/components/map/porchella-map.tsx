@@ -163,10 +163,8 @@ export function PorchellaMap({
 
           if (!isActive && !isSelected) return null;
 
-          // In all-shows mode, color by time slot
-          const slotColor = showAllVenues && perf
-            ? SLOT_COLORS[perf.timeSlot]
-            : undefined;
+          // Always color by time slot so users associate colors with times
+          const slotColor = perf ? SLOT_COLORS[perf.timeSlot] : undefined;
 
           return (
             <Marker
