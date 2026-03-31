@@ -21,6 +21,17 @@ export const metadata: Metadata = {
     description:
       "36+ bands on neighborhood porches. April 18, 12–6 PM in Bellevue, Richmond VA.",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1282, height: 617 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Porchella 2026 — Bellevue Music Walk",
+    description:
+      "36+ bands on neighborhood porches. April 18, 12–6 PM in Bellevue, Richmond VA.",
+    images: ["/og-image.png"],
+  },
+  icons: {
+    icon: "/favicon.svg",
   },
 };
 
