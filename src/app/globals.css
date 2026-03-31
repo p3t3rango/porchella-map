@@ -87,6 +87,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Hide scrollbars on horizontal scroll containers */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Map container takes full height minus header */
 .map-container {
   width: 100%;
