@@ -460,7 +460,7 @@ export const venues: Venue[] = [
   // Fauquier Ave venues (runs roughly east-west)
   {
     id: "3815-fauquier",
-    address: "3813 Fauquier Ave",
+    address: "3815 Fauquier Ave",
     coordinates: [-77.45565, 37.58700],
     street: "Fauquier Ave",
   },
@@ -626,6 +626,13 @@ export const venues: Venue[] = [
     coordinates: [-77.45378, 37.59072],
     street: "Stanhope Ave",
   },
+  // Clinton Ave venues
+  {
+    id: "4008-clinton",
+    address: "4008 Clinton Ave",
+    coordinates: [-77.45948, 37.58891],
+    street: "Clinton Ave",
+  },
   // Crestwood venues
   {
     id: "4117-crestwood",
@@ -644,7 +651,7 @@ export const performances: Performance[] = [
   // 12:30 PM
   { bandId: "tiny-lights", venueId: "1306-claremont", timeSlot: "12:30" },
   { bandId: "4la7la", venueId: "1238-westminster", timeSlot: "12:30" },
-  { bandId: "cary-street-ramblers", venueId: "4019-fauquier", timeSlot: "12:30" },
+  { bandId: "cary-street-ramblers", venueId: "4008-clinton", timeSlot: "12:30" },
   { bandId: "burns-burly-west", venueId: "4003-fauquier", timeSlot: "12:30" },
 
   // 1:15 PM
@@ -706,13 +713,13 @@ export const amenities: Amenity[] = [
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45620, 37.59050],
+    coordinates: [-77.45750, 37.58780],
     label: "Food Trucks — Fauquier near Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45520, 37.59180],
+    coordinates: [-77.45980, 37.58930],
     label: "Food Trucks — Fauquier near Greycourt",
   },
   // Porta-potties
