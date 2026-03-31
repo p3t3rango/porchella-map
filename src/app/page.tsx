@@ -17,6 +17,7 @@ import {
 import { TIME_SLOTS, getCurrentSlot, isEventDay, type TimeSlot } from "@/lib/time";
 import { Music, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { DraggablePanel } from "@/components/draggable-panel";
 import { useFavorites } from "@/lib/favorites";
 
 export default function Home() {
@@ -59,8 +60,6 @@ export default function Home() {
   // Favorites
   const { favorites, toggleFavorite, isFavorite, count: favoritesCount } = useFavorites();
 
-  // Panel expand state (mobile only)
-  const [panelExpanded, setPanelExpanded] = useState(false);
 
   // Selection
   const [selectedPerformance, setSelectedPerformance] =
@@ -127,17 +126,6 @@ export default function Home() {
 
   const panelContent = (
     <>
-      {/* Expand/collapse handle — mobile only */}
-      <button
-        onClick={() => setPanelExpanded((v) => !v)}
-        className="flex flex-col items-center gap-1 py-2 lg:hidden touch-manipulation"
-        aria-label={panelExpanded ? "Collapse band list" : "Expand band list"}
-      >
-        <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
-        <span className="text-[10px] text-muted-foreground">
-          {panelExpanded ? "Show map" : "Show more bands"}
-        </span>
-      </button>
       <TimeSelector
         activeSlot={activeSlot}
         currentSlot={currentSlot}
@@ -246,9 +234,9 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Desktop: side-by-side | Mobile: stacked with expandable panel */}
+      {/* Desktop: side-by-side | Mobile: map + draggable overlay panel */}
       <div className="flex flex-1 flex-col lg:flex-row overflow-hidden relative">
-        {/* Map — always fills the space */}
+        {/* Map — fills the entire area; panel overlays on mobile */}
         <div className="absolute inset-0 lg:relative lg:flex-1">
           <PorchellaMap
             activeSlot={activeSlot}
@@ -260,16 +248,15 @@ export default function Home() {
           />
         </div>
 
-        {/* Panel — overlays map on mobile, sidebar on desktop */}
-        <div
-          className={`
-            absolute bottom-0 left-0 right-0 z-10 flex flex-col
-            border-t bg-background/95 backdrop-blur-md
-            transition-[max-height] duration-300 ease-in-out
-            lg:relative lg:z-auto lg:max-h-none lg:w-[400px] lg:border-t-0 lg:border-l lg:bg-background lg:backdrop-blur-none
-            ${panelExpanded ? "max-h-[85vh]" : "max-h-[55vh]"}
-          `}
-        >
+        {/* Mobile: draggable panel | Desktop: fixed sidebar */}
+        {/* On mobile, DraggablePanel handles positioning */}
+        <div className="lg:hidden">
+          <DraggablePanel>
+            {panelContent}
+          </DraggablePanel>
+        </div>
+        {/* Desktop sidebar */}
+        <div className="hidden lg:flex lg:flex-col lg:w-[400px] lg:border-l lg:overflow-hidden">
           {panelContent}
         </div>
       </div>
