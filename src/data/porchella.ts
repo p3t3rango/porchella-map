@@ -738,45 +738,45 @@ export const amenities: Amenity[] = [
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45480, 37.58720],
+    coordinates: [-77.45390, 37.58685],
     label: "Food Trucks — Fauquier near Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45570, 37.58800],
+    coordinates: [-77.45430, 37.58665],
     label: "Food Trucks — Fauquier near Greycourt",
   },
   // Porta-potties
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45550, 37.58790],
-    label: "Restroom — Fauquier/Nottoway median",
+    coordinates: [-77.45640, 37.58835],
+    label: "Restroom — Nottoway Ave",
   },
   {
     id: "potty-2",
     type: "porta-potty",
-    coordinates: [-77.45280, 37.59208],
-    label: "Restroom — near 1202 Stanhope",
+    coordinates: [-77.45020, 37.59180],
+    label: "Restroom — Stanhope near Brook Rd",
   },
   {
     id: "potty-3",
     type: "porta-potty",
-    coordinates: [-77.45340, 37.58631],
-    label: "Restroom — near 3861 Fauquier",
+    coordinates: [-77.45360, 37.58640],
+    label: "Restroom — Greycourt near Newport",
   },
   {
     id: "potty-4",
     type: "porta-potty",
-    coordinates: [-77.46139, 37.58870],
+    coordinates: [-77.46150, 37.58850],
     label: "Restroom — Mount Vernon",
   },
   {
     id: "potty-5",
     type: "porta-potty",
-    coordinates: [-77.45420, 37.59391],
-    label: "Restroom — 1237 Westminster",
+    coordinates: [-77.45490, 37.59300],
+    label: "Restroom — Westminster/Windsor",
   },
   // Merch / Info
   {
