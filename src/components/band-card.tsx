@@ -10,6 +10,7 @@ type BandCardProps = {
   band: Band;
   venue: Venue;
   timeSlot: TimeSlot;
+  timeColor: string;
   isSelected: boolean;
   isFavorite: boolean;
   onToggleFavorite: () => void;
@@ -20,6 +21,7 @@ export function BandCard({
   band,
   venue,
   timeSlot,
+  timeColor,
   isSelected,
   isFavorite,
   onToggleFavorite,
@@ -28,13 +30,14 @@ export function BandCard({
   return (
     <div
       className={`
-        relative w-full text-left rounded-lg border p-3 transition-all duration-150
+        relative w-full text-left rounded-lg border-l-4 border p-3 transition-all duration-150
         ${
           isSelected
-            ? "border-primary bg-primary/5 shadow-sm"
-            : "border-border bg-card hover:border-primary/40 hover:shadow-sm"
+            ? "bg-primary/5 shadow-sm border-border"
+            : "border-border bg-card hover:shadow-sm"
         }
       `}
+      style={{ borderLeftColor: timeColor }}
     >
       <button
         onClick={onClick}

@@ -16,6 +16,7 @@ import {
 } from "@/data/porchella";
 import { TIME_SLOTS, getCurrentSlot, isEventDay, type TimeSlot } from "@/lib/time";
 import { Music, ExternalLink } from "lucide-react";
+import { SLOT_COLORS } from "@/lib/colors";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DraggablePanel } from "@/components/draggable-panel";
 import { useFavorites } from "@/lib/favorites";
@@ -171,6 +172,7 @@ export default function Home() {
                 band={p.band}
                 venue={p.venue}
                 timeSlot={p.timeSlot}
+                timeColor={SLOT_COLORS[p.timeSlot]}
                 isSelected={selectedPerformance?.bandId === p.bandId}
                 isFavorite={isFavorite(p.bandId)}
                 onToggleFavorite={() => toggleFavorite(p.bandId)}

@@ -2,17 +2,7 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import { TIME_SLOTS, TIME_SLOT_LABELS, type TimeSlot } from "@/lib/time";
-
-const SLOT_COLORS: Record<TimeSlot, string> = {
-  "12:00": "#ef4444",
-  "12:30": "#f97316",
-  "1:15": "#eab308",
-  "2:00": "#22c55e",
-  "2:45": "#06b6d4",
-  "3:30": "#3b82f6",
-  "4:15": "#8b5cf6",
-  "5:10": "#ec4899",
-};
+import { SLOT_COLORS } from "@/lib/colors";
 
 type TimeSelectorProps = {
   activeSlot: TimeSlot;

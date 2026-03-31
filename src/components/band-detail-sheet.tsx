@@ -88,19 +88,18 @@ export function BandDetailSheet({
         side="bottom"
         className="max-h-[85vh] overflow-y-auto rounded-t-2xl px-5 pb-8 pt-4"
       >
-        {/* Band image — cover with focus on center */}
+        {/* Band image — show full image, no awkward crops */}
         {band.image && (
-          <div className="relative -mx-5 -mt-4 mb-3 h-44 sm:h-52 overflow-hidden rounded-t-2xl bg-muted">
+          <div className="relative -mx-5 -mt-4 mb-3 overflow-hidden rounded-t-2xl bg-muted">
             <Image
               src={band.image}
               alt={band.name}
-              fill
-              className="object-cover object-center"
+              width={800}
+              height={500}
+              className="w-full h-auto max-h-[35vh] object-contain"
               sizes="(max-width: 768px) 100vw, 600px"
               priority
             />
-            {/* Gradient fade at bottom for smooth transition to content */}
-            <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-card to-transparent" />
           </div>
         )}
 
