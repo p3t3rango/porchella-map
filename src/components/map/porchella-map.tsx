@@ -132,10 +132,11 @@ export function PorchellaMap({
         ref={mapRef}
         initialViewState={INITIAL_VIEW}
         maxBounds={MAX_BOUNDS}
-        minZoom={13}
+        minZoom={14}
         maxZoom={18}
         mapStyle={isDark ? MAP_STYLES.dark : MAP_STYLES.light}
         attributionControl={false}
+        cooperativeGestures={true}
         onLoad={() => setMapLoaded(true)}
         reuseMaps
       >
