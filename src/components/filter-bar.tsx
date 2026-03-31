@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, X, Heart, Eye, Toilet, UtensilsCrossed } from "lucide-react";
+import { Search, X, Heart, Eye, Toilet, UtensilsCrossed, Share2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { getAllGenres } from "@/data/porchella";
 
@@ -18,6 +18,7 @@ type FilterBarProps = {
   onToggleRestrooms: () => void;
   showFoodTrucks: boolean;
   onToggleFoodTrucks: () => void;
+  shareURL: string | null;
   resultCount: number;
 };
 
@@ -37,6 +38,7 @@ export function FilterBar({
   onToggleRestrooms,
   showFoodTrucks,
   onToggleFoodTrucks,
+  shareURL,
   resultCount,
 }: FilterBarProps) {
   return (
@@ -90,6 +92,27 @@ export function FilterBar({
           <Heart className={`h-3 w-3 ${showFavorites ? "fill-current" : ""}`} />
           Favorites{favoritesCount > 0 ? ` (${favoritesCount})` : ""}
         </button>
+        {shareURL && (
+          <button
+            onClick={async () => {
+              if (navigator.share) {
+                await navigator.share({ title: "My Porchella 2026 Lineup", url: shareURL });
+              } else {
+                await navigator.clipboard.writeText(shareURL);
+                // Brief visual feedback
+                const btn = document.activeElement as HTMLButtonElement;
+                const orig = btn?.textContent;
+                if (btn) btn.textContent = "Copied!";
+                setTimeout(() => { if (btn && orig) btn.textContent = orig; }, 1500);
+              }
+            }}
+            aria-label="Share your favorites list"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
+          >
+            <Share2 className="h-3 w-3" />
+            Share
+          </button>
+        )}
         <button
           onClick={onToggleAllVenues}
           aria-label={showAllVenues ? "Show current time slot" : "Show all time slots on map"}

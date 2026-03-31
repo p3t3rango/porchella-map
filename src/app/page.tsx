@@ -19,6 +19,7 @@ import { Music, ExternalLink } from "lucide-react";
 import { SLOT_COLORS } from "@/lib/colors";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DraggablePanel } from "@/components/draggable-panel";
+import { FoodTruckSheet } from "@/components/food-truck-sheet";
 import { useFavorites } from "@/lib/favorites";
 
 export default function Home() {
@@ -59,9 +60,10 @@ export default function Home() {
   const [showAllVenues, setShowAllVenues] = useState(false);
   const [showRestrooms, setShowRestrooms] = useState(true);
   const [showFoodTrucks, setShowFoodTrucks] = useState(true);
+  const [foodTruckSheetOpen, setFoodTruckSheetOpen] = useState(false);
 
   // Favorites
-  const { favorites, toggleFavorite, isFavorite, count: favoritesCount } = useFavorites();
+  const { favorites, toggleFavorite, isFavorite, count: favoritesCount, getShareURL } = useFavorites();
 
 
   // Selection
@@ -151,7 +153,15 @@ export default function Home() {
         showRestrooms={showRestrooms}
         onToggleRestrooms={() => setShowRestrooms((v) => !v)}
         showFoodTrucks={showFoodTrucks}
-        onToggleFoodTrucks={() => setShowFoodTrucks((v) => !v)}
+        onToggleFoodTrucks={() => {
+          if (showFoodTrucks) {
+            // Already showing — open the detail sheet
+            setFoodTruckSheetOpen(true);
+          } else {
+            setShowFoodTrucks(true);
+          }
+        }}
+        shareURL={getShareURL()}
         resultCount={slotPerformances.length}
       />
 
@@ -282,6 +292,12 @@ export default function Home() {
         onClose={() => handleSelectPerformance(null)}
         isFavorite={selectedPerformance ? isFavorite(selectedPerformance.bandId) : false}
         onToggleFavorite={selectedPerformance ? () => toggleFavorite(selectedPerformance.bandId) : undefined}
+      />
+
+      {/* Food truck sheet */}
+      <FoodTruckSheet
+        open={foodTruckSheetOpen}
+        onClose={() => setFoodTruckSheetOpen(false)}
       />
     </div>
   );
