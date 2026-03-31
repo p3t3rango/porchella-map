@@ -22,8 +22,8 @@ import type { TimeSlot } from "@/lib/time";
 
 // Bellevue neighborhood center — centered on the venue cluster
 const INITIAL_VIEW = {
-  longitude: -77.4558,
-  latitude: 37.5885,
+  longitude: -77.4555,
+  latitude: 37.5880,
   zoom: 15.5,
   pitch: 0,
   bearing: 0,

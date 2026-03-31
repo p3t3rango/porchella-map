@@ -482,187 +482,187 @@ export const bands: Band[] = [
 // ─── Venues ──────────────────────────────────────────────────────────
 
 export const venues: Venue[] = [
-  // Fauquier Ave venues (runs roughly east-west)
+  // Fauquier Ave venues (runs roughly NE-SW)
   {
     id: "3815-fauquier",
     address: "3815 Fauquier Ave",
-    coordinates: [-77.45565, 37.58700],
+    coordinates: [-77.45196, 37.58519],
     street: "Fauquier Ave",
   },
   {
     id: "3861-fauquier",
     address: "3861 Fauquier Ave",
-    coordinates: [-77.45607, 37.58853],
+    coordinates: [-77.45340, 37.58631],
     street: "Fauquier Ave",
   },
   {
     id: "3867-fauquier",
     address: "3867 Fauquier Ave",
-    coordinates: [-77.45647, 37.58853],
+    coordinates: [-77.45350, 37.58638],
     street: "Fauquier Ave",
   },
   {
     id: "3900-fauquier",
     address: "3900 Fauquier Ave",
-    coordinates: [-77.45687, 37.58862],
+    coordinates: [-77.45434, 37.58670],
     street: "Fauquier Ave",
   },
   {
     id: "3955-fauquier",
     address: "3955 Fauquier Ave",
-    coordinates: [-77.45700, 37.58959],
+    coordinates: [-77.45538, 37.58784],
     street: "Fauquier Ave",
   },
   {
     id: "4003-fauquier",
     address: "4003 Fauquier Ave",
-    coordinates: [-77.45741, 37.58825],
+    coordinates: [-77.45656, 37.58862],
     street: "Fauquier Ave",
   },
   {
     id: "4014-fauquier",
     address: "4014 Fauquier Ave",
-    coordinates: [-77.45791, 37.58826],
+    coordinates: [-77.45683, 37.58884],
     street: "Fauquier Ave",
   },
   {
     id: "4000-fauquier",
     address: "4000 Fauquier Ave",
-    coordinates: [-77.45741, 37.58507],
+    coordinates: [-77.45666, 37.58852],
     street: "Fauquier Ave",
   },
   {
     id: "4019-fauquier",
     address: "4019 Fauquier Ave",
-    coordinates: [-77.45836, 37.58691],
+    coordinates: [-77.45674, 37.58897],
     street: "Fauquier Ave",
   },
   // Claremont Ave venues
   {
     id: "1306-claremont",
     address: "1306 Claremont Ave",
-    coordinates: [-77.45358, 37.58667],
+    coordinates: [-77.45386, 37.58820],
     street: "Claremont Ave",
   },
   {
     id: "1312-claremont",
     address: "1312 Claremont Ave",
-    coordinates: [-77.45384, 37.58683],
+    coordinates: [-77.45396, 37.58820],
     street: "Claremont Ave",
   },
   {
     id: "1413-claremont",
     address: "1413 Claremont Ave",
-    coordinates: [-77.45518, 37.58762],
+    coordinates: [-77.45620, 37.58715],
     street: "Claremont Ave",
   },
   {
     id: "1414-claremont",
     address: "1414 Claremont Ave",
-    coordinates: [-77.45554, 37.58775],
+    coordinates: [-77.45625, 37.58726],
     street: "Claremont Ave",
   },
   // Westminster Ave venues
   {
     id: "1238-westminster",
     address: "1238 Westminster Ave",
-    coordinates: [-77.45305, 37.58600],
+    coordinates: [-77.45455, 37.59395],
     street: "Westminster Ave",
   },
   {
     id: "1221-westminster",
     address: "1221 Westminster Ave",
-    coordinates: [-77.45248, 37.58577],
+    coordinates: [-77.45386, 37.59388],
     street: "Westminster Ave",
   },
   // Nottoway Ave venues
   {
     id: "1226-nottoway",
     address: "1226 Nottoway Ave",
-    coordinates: [-77.45298, 37.58836],
+    coordinates: [-77.45259, 37.58917],
     street: "Nottoway Ave",
   },
   {
     id: "1305-nottoway",
     address: "1305 Nottoway Ave",
-    coordinates: [-77.45364, 37.58923],
+    coordinates: [-77.45388, 37.58902],
     street: "Nottoway Ave",
   },
   {
     id: "1420-nottoway",
     address: "1420 Nottoway Ave",
-    coordinates: [-77.45515, 37.58976],
+    coordinates: [-77.45689, 37.58830],
     street: "Nottoway Ave",
   },
   // Greycourt Ave venues
   {
     id: "1220-greycourt",
     address: "1220 Greycourt Ave",
-    coordinates: [-77.45331, 37.59199],
+    coordinates: [-77.45219, 37.58732],
     street: "Greycourt Ave",
   },
   {
     id: "1218-greycourt",
     address: "1218 Greycourt Ave",
-    coordinates: [-77.45320, 37.59199],
+    coordinates: [-77.45215, 37.58733],
     street: "Greycourt Ave",
   },
   {
     id: "1416-greycourt",
     address: "1416 Greycourt Ave",
-    coordinates: [-77.45493, 37.59368],
+    coordinates: [-77.45626, 37.58628],
     street: "Greycourt Ave",
   },
   {
     id: "1402-greycourt",
     address: "1402 Greycourt Ave",
-    coordinates: [-77.45420, 37.59320],
+    coordinates: [-77.45596, 37.58629],
     street: "Greycourt Ave",
   },
   // Mount Vernon venues
   {
     id: "4029-mt-vernon",
-    address: "4029 Mount Vernon St",
-    coordinates: [-77.45876, 37.58504],
+    address: "4029 Mount Vernon Ave",
+    coordinates: [-77.46139, 37.58886],
     street: "Mount Vernon",
   },
   {
     id: "4027-mt-vernon",
     address: "4027 Mount Vernon Ave",
-    coordinates: [-77.45864, 37.58639],
+    coordinates: [-77.46139, 37.58881],
     street: "Mount Vernon",
   },
   {
     id: "4017-mt-vernon",
     address: "4017 Mount Vernon Ave",
-    coordinates: [-77.45835, 37.59174],
+    coordinates: [-77.46137, 37.58856],
     street: "Mount Vernon",
   },
   // Stanhope Ave venues
   {
     id: "1400-stanhope",
     address: "1400 Stanhope Ave",
-    coordinates: [-77.45649, 37.59394],
+    coordinates: [-77.45712, 37.59189],
     street: "Stanhope Ave",
   },
   {
     id: "1202-stanhope",
     address: "1202 Stanhope Ave",
-    coordinates: [-77.45378, 37.59072],
+    coordinates: [-77.45280, 37.59208],
     street: "Stanhope Ave",
   },
   // Clinton Ave venues
   {
     id: "4008-clinton",
     address: "4008 Clinton Ave",
-    coordinates: [-77.45948, 37.58891],
+    coordinates: [-77.45954, 37.58891],
     street: "Clinton Ave",
   },
   // Crestwood venues
   {
     id: "4117-crestwood",
     address: "4117 Crestwood Rd",
-    coordinates: [-77.45996, 37.59315],
+    coordinates: [-77.45998, 37.59313],
     street: "Crestwood Rd",
   },
 ];
@@ -738,51 +738,51 @@ export const amenities: Amenity[] = [
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45690, 37.58885],
+    coordinates: [-77.45480, 37.58720],
     label: "Food Trucks — Fauquier near Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45700, 37.58935],
+    coordinates: [-77.45570, 37.58800],
     label: "Food Trucks — Fauquier near Greycourt",
   },
   // Porta-potties
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45692, 37.58987],
+    coordinates: [-77.45550, 37.58790],
     label: "Restroom — Fauquier/Nottoway median",
   },
   {
     id: "potty-2",
     type: "porta-potty",
-    coordinates: [-77.45378, 37.59072],
+    coordinates: [-77.45280, 37.59208],
     label: "Restroom — near 1202 Stanhope",
   },
   {
     id: "potty-3",
     type: "porta-potty",
-    coordinates: [-77.45607, 37.58853],
+    coordinates: [-77.45340, 37.58631],
     label: "Restroom — near 3861 Fauquier",
   },
   {
     id: "potty-4",
     type: "porta-potty",
-    coordinates: [-77.45864, 37.58639],
+    coordinates: [-77.46139, 37.58870],
     label: "Restroom — Mount Vernon",
   },
   {
     id: "potty-5",
     type: "porta-potty",
-    coordinates: [-77.45248, 37.58577],
+    coordinates: [-77.45420, 37.59391],
     label: "Restroom — 1237 Westminster",
   },
   // Merch / Info
   {
     id: "merch-1",
     type: "merch",
-    coordinates: [-77.45650, 37.58897],
+    coordinates: [-77.45660, 37.58870],
     label: "BCA Tent — Merch & Info",
   },
 ];
@@ -837,12 +837,12 @@ export const streetClosures: StreetClosure[] = [
     startTime: "11:30 AM",
     endTime: "6:30 PM",
     coordinates: [
-      [-77.4613, 37.5900],
-      [-77.4600, 37.5893],
-      [-77.4580, 37.5880],
-      [-77.4560, 37.5870],
-      [-77.4540, 37.5860],
-      [-77.4525, 37.5858],
+      [-77.4570, 37.5890],
+      [-77.4560, 37.5885],
+      [-77.4550, 37.5878],
+      [-77.4540, 37.5870],
+      [-77.4530, 37.5860],
+      [-77.4520, 37.5852],
     ],
   },
 ];
