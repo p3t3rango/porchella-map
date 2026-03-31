@@ -20,7 +20,9 @@ import { SLOT_COLORS } from "@/lib/colors";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { DraggablePanel } from "@/components/draggable-panel";
 import { FoodTruckSheet } from "@/components/food-truck-sheet";
+import { AmenityDetailSheet } from "@/components/amenity-detail-sheet";
 import { useFavorites } from "@/lib/favorites";
+import type { Amenity } from "@/data/porchella";
 
 export default function Home() {
   // Time slot state — default to current slot on event day, else first slot
@@ -61,6 +63,7 @@ export default function Home() {
   const [showRestrooms, setShowRestrooms] = useState(true);
   const [showFoodTrucks, setShowFoodTrucks] = useState(true);
   const [foodTruckSheetOpen, setFoodTruckSheetOpen] = useState(false);
+  const [selectedAmenity, setSelectedAmenity] = useState<Amenity | null>(null);
 
   // Favorites
   const { favorites, toggleFavorite, isFavorite, count: favoritesCount, getShareURL } = useFavorites();
@@ -226,7 +229,7 @@ export default function Home() {
   return (
     <div className="flex h-dvh flex-col" id="main-content">
       {/* Header */}
-      <header className="flex items-center justify-between border-b bg-background px-3 py-2 lg:px-4">
+      <header className="relative z-20 flex items-center justify-between border-b bg-background px-3 py-2 lg:px-4">
         <div className="flex items-center gap-2">
           <Music className="h-5 w-5 text-primary" />
           <div>
@@ -267,6 +270,7 @@ export default function Home() {
             favorites={favorites}
             showRestrooms={showRestrooms}
             showFoodTrucks={showFoodTrucks}
+            onAmenityClick={setSelectedAmenity}
           />
         </div>
 
@@ -298,6 +302,13 @@ export default function Home() {
       <FoodTruckSheet
         open={foodTruckSheetOpen}
         onClose={() => setFoodTruckSheetOpen(false)}
+      />
+
+      {/* Amenity detail sheet (porta-potty directions) */}
+      <AmenityDetailSheet
+        amenity={selectedAmenity}
+        open={selectedAmenity !== null}
+        onClose={() => setSelectedAmenity(null)}
       />
     </div>
   );

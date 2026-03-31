@@ -16,6 +16,7 @@ import {
   getBand,
   getVenue,
   type Performance,
+  type Amenity,
 } from "@/data/porchella";
 import type { TimeSlot } from "@/lib/time";
 
@@ -28,9 +29,9 @@ const INITIAL_VIEW = {
   bearing: 0,
 };
 
-// Bounds to constrain panning — loosened for smoother navigation
+// Bounds to constrain panning — wide enough to scroll freely at min zoom
 const MAX_BOUNDS: [number, number, number, number] = [
-  -77.475, 37.575, -77.440, 37.605,
+  -77.49, 37.56, -77.42, 37.62,
 ];
 
 const STREET_CLOSURE_STYLE: LineLayerSpecification["paint"] = {
@@ -58,6 +59,7 @@ type PorchellaMapProps = {
   favorites?: Set<string>;
   showRestrooms?: boolean;
   showFoodTrucks?: boolean;
+  onAmenityClick?: (amenity: Amenity) => void;
 };
 
 export function PorchellaMap({
@@ -71,6 +73,7 @@ export function PorchellaMap({
   favorites,
   showRestrooms = true,
   showFoodTrucks = true,
+  onAmenityClick,
 }: PorchellaMapProps) {
   const mapRef = useRef<MapRef>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
@@ -199,7 +202,7 @@ export function PorchellaMap({
             latitude={amenity.coordinates[1]}
             anchor="center"
           >
-            <AmenityMarker type={amenity.type} label={amenity.label} />
+            <AmenityMarker type={amenity.type} label={amenity.label} onClick={() => onAmenityClick?.(amenity)} />
           </Marker>
         ))}
       </Map>
