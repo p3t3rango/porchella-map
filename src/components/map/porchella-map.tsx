@@ -28,9 +28,9 @@ const INITIAL_VIEW = {
   bearing: 0,
 };
 
-// Bounds to constrain panning
+// Bounds to constrain panning — loosened for smoother navigation
 const MAX_BOUNDS: [number, number, number, number] = [
-  -77.468, 37.582, -77.448, 37.598,
+  -77.475, 37.575, -77.440, 37.605,
 ];
 
 const STREET_CLOSURE_STYLE: LineLayerSpecification["paint"] = {
@@ -121,14 +121,6 @@ export function PorchellaMap({
       const perf = activePerformances.find((p) => p.venueId === venueId);
       if (perf) {
         onSelectPerformance(perf);
-        const venue = getVenue(venueId);
-        if (venue && mapRef.current) {
-          mapRef.current.flyTo({
-            center: venue.coordinates,
-            zoom: 16.5,
-            duration: prefersReducedMotion ? 0 : 800,
-          });
-        }
       }
     },
     [activePerformances, onSelectPerformance, prefersReducedMotion]

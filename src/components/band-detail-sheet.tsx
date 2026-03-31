@@ -44,7 +44,13 @@ export function BandDetailSheet({
 }: BandDetailSheetProps) {
   if (!band || !venue || !timeSlot) return null;
 
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${venue.coordinates[1]},${venue.coordinates[0]}&travelmode=walking`;
+  const lat = venue.coordinates[1];
+  const lng = venue.coordinates[0];
+  const directionsLinks = [
+    { label: "Google Maps", url: `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=walking` },
+    { label: "Apple Maps", url: `https://maps.apple.com/?daddr=${lat},${lng}&dirflg=w` },
+    { label: "Waze", url: `https://waze.com/ul?ll=${lat},${lng}&navigate=yes` },
+  ];
 
   const socialLinks = [
     band.social.instagram && {
@@ -138,20 +144,25 @@ export function BandDetailSheet({
           </div>
 
           {/* Venue + Directions */}
-          <div className="flex items-center justify-between rounded-lg border bg-secondary/50 p-3">
+          <div className="rounded-lg border bg-secondary/50 p-3 space-y-2">
             <div className="flex items-center gap-2 text-sm">
               <MapPin className="h-4 w-4 text-muted-foreground" />
               <span>{venue.address}</span>
             </div>
-            <a
-              href={directionsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              <Navigation className="h-3 w-3" />
-              Directions
-            </a>
+            <div className="flex gap-2">
+              {directionsLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium hover:bg-accent transition-colors"
+                >
+                  <Navigation className="h-3 w-3" />
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Description */}

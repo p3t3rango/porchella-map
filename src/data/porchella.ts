@@ -702,18 +702,18 @@ export const performances: Performance[] = [
 // ─── Amenities ───────────────────────────────────────────────────────
 
 export const amenities: Amenity[] = [
-  // Food trucks — 2 locations from official flyer
+  // Food trucks — on Fauquier Ave between Claremont and Greycourt
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45515, 37.58910],
-    label: "Food Trucks — Nottoway & Claremont",
+    coordinates: [-77.45620, 37.59050],
+    label: "Food Trucks — Fauquier near Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45580, 37.59200],
-    label: "Food Trucks — Claremont & Greycourt",
+    coordinates: [-77.45520, 37.59180],
+    label: "Food Trucks — Fauquier near Greycourt",
   },
   // Porta-potties
   {
