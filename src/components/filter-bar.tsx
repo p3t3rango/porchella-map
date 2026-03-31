@@ -78,12 +78,12 @@ export function FilterBar({
           ))}
         </select>
       </div>
-      {/* Quick toggles */}
-      <div className="flex gap-2">
+      {/* Quick toggles — scrollable on mobile */}
+      <div className="flex gap-2 overflow-x-auto scrollbar-none pb-0.5" style={{ WebkitOverflowScrolling: "touch" }}>
         <button
           onClick={onToggleFavorites}
           aria-label={showFavorites ? "Show all bands" : "Show only favorites"}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors flex-shrink-0 ${
             showFavorites
               ? "bg-pink-500/15 text-pink-600 dark:text-pink-400 border border-pink-500/30"
               : "bg-secondary text-secondary-foreground hover:bg-accent"
@@ -99,24 +99,18 @@ export function FilterBar({
                 await navigator.share({ title: "My Porchella 2026 Lineup", url: shareURL });
               } else {
                 await navigator.clipboard.writeText(shareURL);
-                // Brief visual feedback
-                const btn = document.activeElement as HTMLButtonElement;
-                const orig = btn?.textContent;
-                if (btn) btn.textContent = "Copied!";
-                setTimeout(() => { if (btn && orig) btn.textContent = orig; }, 1500);
               }
             }}
             aria-label="Share your favorites list"
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
+            className="inline-flex items-center justify-center rounded-full h-6 w-6 flex-shrink-0 bg-secondary text-secondary-foreground hover:bg-accent transition-colors"
           >
             <Share2 className="h-3 w-3" />
-            Share
           </button>
         )}
         <button
           onClick={onToggleAllVenues}
           aria-label={showAllVenues ? "Show current time slot" : "Show all time slots on map"}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors flex-shrink-0 ${
             showAllVenues
               ? "bg-primary/15 text-primary border border-primary/30"
               : "bg-secondary text-secondary-foreground hover:bg-accent"
@@ -128,7 +122,7 @@ export function FilterBar({
         <button
           onClick={onToggleRestrooms}
           aria-label={showRestrooms ? "Hide restrooms on map" : "Show restrooms on map"}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors flex-shrink-0 ${
             showRestrooms
               ? "bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30"
               : "bg-secondary text-secondary-foreground hover:bg-accent"
@@ -140,7 +134,7 @@ export function FilterBar({
         <button
           onClick={onToggleFoodTrucks}
           aria-label={showFoodTrucks ? "Hide food trucks" : "Show food trucks"}
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors flex-shrink-0 ${
             showFoodTrucks
               ? "bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30"
               : "bg-secondary text-secondary-foreground hover:bg-accent"
