@@ -16,6 +16,11 @@ export type Band = {
     youtube?: string;
     linktree?: string;
   };
+  music?: {
+    type: "spotify" | "bandcamp" | "youtube";
+    url: string; // link to artist/album page
+    embedId?: string; // Spotify artist ID, Bandcamp album ID, or YouTube video ID
+  };
   tip?: {
     venmo?: string;
     paypal?: string;
@@ -85,6 +90,7 @@ export const bands: Band[] = [
     social: {
       bandcamp: "https://tinylightsrva.bandcamp.com/releases",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/6HvgZ9EgcwU2vDzstetoGu", embedId: "6HvgZ9EgcwU2vDzstetoGu" },
     tip: {},
   },
   {
@@ -96,6 +102,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/4la7la/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/0uyMAQURKmSQXrHynnDZZC", embedId: "0uyMAQURKmSQXrHynnDZZC" },
     tip: { venmo: "fourla7la" },
   },
   {
@@ -105,6 +112,7 @@ export const bands: Band[] = [
     description: "Bring an engaging and authentic experience to acoustic music enthusiasts.",
     image: "/images/cary-street-ramblers.png",
     social: {},
+    music: { type: "bandcamp", url: "https://carystreetramblers.bandcamp.com" },
     tip: {},
   },
   {
@@ -116,6 +124,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/burnsburlywest/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/3RAYYGyN1Wm76lNwxlQO5n", embedId: "3RAYYGyN1Wm76lNwxlQO5n" },
     tip: {},
   },
   {
@@ -138,6 +147,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/sisterplanetband/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/3J1MRq1rEP9dEIAcFG7hQM", embedId: "3J1MRq1rEP9dEIAcFG7hQM" },
     tip: { venmo: "Charles-Clark-18" },
   },
   {
@@ -149,6 +159,7 @@ export const bands: Band[] = [
     social: {
       website: "http://www.brookhousemusic.com",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/3Q3bvJH208sRHWL8THw9Ys", embedId: "3Q3bvJH208sRHWL8THw9Ys" },
     tip: { venmo: "brookhouse-music", paypal: "https://www.paypal.com/ncp/payment/MDLA9QW26GKJL" },
   },
   {
@@ -171,6 +182,7 @@ export const bands: Band[] = [
     social: {
       facebook: "https://www.facebook.com/tarrantmusic/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/1ak4w6EgeMtCMjPmKsE9H0", embedId: "1ak4w6EgeMtCMjPmKsE9H0" },
     tip: { venmo: "zachary-hudgins" },
   },
   {
@@ -182,6 +194,7 @@ export const bands: Band[] = [
     social: {
       facebook: "https://www.facebook.com/TheHighFrequenciesMusic",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/4MdvuHqB7XJ5JytsFzdEJV", embedId: "4MdvuHqB7XJ5JytsFzdEJV" },
     tip: {},
   },
   {
@@ -204,6 +217,7 @@ export const bands: Band[] = [
     social: {
       youtube: "https://www.youtube.com/@seancastleberrymusic7769",
     },
+    music: { type: "youtube", url: "https://www.youtube.com/@seancastleberrymusic7769" },
     tip: { venmo: "sean-castleberry" },
   },
   {
@@ -237,6 +251,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/thelonelyteardrops/",
     },
+    music: { type: "bandcamp", url: "https://thelonelyteardrops.bandcamp.com" },
     tip: {},
   },
   {
@@ -270,6 +285,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/floodwall_",
     },
+    music: { type: "bandcamp", url: "https://floodwall.bandcamp.com" },
     tip: { venmo: "foodzn" },
   },
   {
@@ -292,6 +308,7 @@ export const bands: Band[] = [
     social: {
       bandcamp: "https://crackfoxrva.bandcamp.com/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/6thEbLiYB1L7b97rEOH2Rk", embedId: "6thEbLiYB1L7b97rEOH2Rk" },
     tip: { venmo: "Philmento" },
   },
   {
@@ -314,6 +331,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/night_idea",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/1vTS752TnggovIaSUrMEpo", embedId: "1vTS752TnggovIaSUrMEpo" },
     tip: {},
   },
   {
@@ -356,6 +374,7 @@ export const bands: Band[] = [
       instagram: "https://www.instagram.com/wrongworshippers/",
       linktree: "https://linktr.ee/wrongworshippers",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/0lKNgrtWtCrbVUghOHShpu", embedId: "0lKNgrtWtCrbVUghOHShpu" },
     tip: { venmo: "nick-g-walker", paypal: "https://paypal.me/wrongworshippers" },
   },
   {
@@ -367,6 +386,7 @@ export const bands: Band[] = [
     social: {
       instagram: "https://www.instagram.com/leslieandthedots/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/4rPdoiEhBFAbrOqKjX42V6", embedId: "4rPdoiEhBFAbrOqKjX42V6" },
     tip: {},
   },
   {
@@ -396,6 +416,7 @@ export const bands: Band[] = [
     description: "Released their original debut album Record Of The Year back in 2006 and still standing seventeen years later. Featuring Jon Brown, Kevin Wade Inge, Steve Chiles, and Ricky Tubb. Celebrating the release of Sundogs Dancing In The Early Morning Light.",
     image: "/images/horsehead.png",
     social: {},
+    music: { type: "spotify", url: "https://open.spotify.com/artist/2waRRGuMSuBJY26sNnHFF9", embedId: "2waRRGuMSuBJY26sNnHFF9" },
     tip: {},
   },
   {
@@ -407,6 +428,7 @@ export const bands: Band[] = [
     social: {
       facebook: "http://www.facebook.com/theatkinsons",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/4zliIO092NXXBFhu3OTwQS", embedId: "4zliIO092NXXBFhu3OTwQS" },
     tip: { venmo: "Jamiekwood" },
   },
   {
@@ -416,6 +438,7 @@ export const bands: Band[] = [
     description: "Four piece bluegrass band. Playing together for 12 years.",
     image: "/images/river-city-band.jpg",
     social: {},
+    music: { type: "spotify", url: "https://open.spotify.com/artist/2oGugUVVbpr7jIz9Ua9TvX", embedId: "2oGugUVVbpr7jIz9Ua9TvX" },
     tip: {},
   },
   {
@@ -427,6 +450,7 @@ export const bands: Band[] = [
     social: {
       website: "https://www.hiprabir.com",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/4a5B5sBWnS8W7AvJheQgne", embedId: "4a5B5sBWnS8W7AvJheQgne" },
     tip: { venmo: "PrabirRVA" },
   },
   {
@@ -438,6 +462,7 @@ export const bands: Band[] = [
     social: {
       website: "http://www.jangling.net/",
     },
+    music: { type: "spotify", url: "https://open.spotify.com/artist/4wch3YzfFEfrzaT7pAXEFa", embedId: "4wch3YzfFEfrzaT7pAXEFa" },
     tip: {},
   },
   {

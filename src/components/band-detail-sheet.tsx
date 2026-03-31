@@ -170,6 +170,58 @@ export function BandDetailSheet({
             <p className="text-sm text-muted-foreground">{band.description}</p>
           )}
 
+          {/* Music Preview */}
+          {band.music && (
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium flex items-center gap-1.5">
+                <Music className="h-3.5 w-3.5" />
+                Listen
+              </h4>
+              {band.music.type === "spotify" && band.music.embedId && (
+                <iframe
+                  src={`https://open.spotify.com/embed/artist/${band.music.embedId}?utm_source=generator&theme=0`}
+                  width="100%"
+                  height="152"
+                  frameBorder="0"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                  className="rounded-lg"
+                  title={`${band.name} on Spotify`}
+                />
+              )}
+              {band.music.type === "bandcamp" && (
+                <a
+                  href={band.music.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-lg border p-3 hover:bg-accent transition-colors"
+                >
+                  <Music className="h-5 w-5 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Listen on Bandcamp</p>
+                    <p className="text-xs text-muted-foreground">Stream and support the artist</p>
+                  </div>
+                  <ExternalLink className="h-4 w-4 ml-auto text-muted-foreground" />
+                </a>
+              )}
+              {band.music.type === "youtube" && (
+                <a
+                  href={band.music.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-lg border p-3 hover:bg-accent transition-colors"
+                >
+                  <Music className="h-5 w-5 text-muted-foreground" />
+                  <div>
+                    <p className="text-sm font-medium">Watch on YouTube</p>
+                    <p className="text-xs text-muted-foreground">Videos and live performances</p>
+                  </div>
+                  <ExternalLink className="h-4 w-4 ml-auto text-muted-foreground" />
+                </a>
+              )}
+            </div>
+          )}
+
           {/* Social Links */}
           {socialLinks.length > 0 && (
             <div className="space-y-2">
