@@ -738,13 +738,13 @@ export const amenities: Amenity[] = [
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45530, 37.58790],
+    coordinates: [-77.45500, 37.58750],
     label: "Food Trucks — Fauquier near Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45490, 37.58770],
+    coordinates: [-77.45460, 37.58730],
     label: "Food Trucks — Fauquier near Greycourt",
   },
   // Porta-potties — positions from official PDF flyer map
