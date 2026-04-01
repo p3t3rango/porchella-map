@@ -738,21 +738,21 @@ export const amenities: Amenity[] = [
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45410, 37.58660],
+    coordinates: [-77.45530, 37.58790],
     label: "Food Trucks — Fauquier near Claremont",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45380, 37.58650],
+    coordinates: [-77.45490, 37.58770],
     label: "Food Trucks — Fauquier near Greycourt",
   },
-  // Porta-potties
+  // Porta-potties — positions from official PDF flyer map
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45780, 37.58820],
-    label: "Restroom — Nottoway near MacArthur",
+    coordinates: [-77.45670, 37.58830],
+    label: "Restroom — Nottoway/Fauquier",
   },
   {
     id: "potty-2",
@@ -769,14 +769,14 @@ export const amenities: Amenity[] = [
   {
     id: "potty-4",
     type: "porta-potty",
-    coordinates: [-77.46155, 37.58950],
+    coordinates: [-77.46155, 37.58930],
     label: "Restroom — Mount Vernon",
   },
   {
     id: "potty-5",
     type: "porta-potty",
-    coordinates: [-77.45690, 37.59340],
-    label: "Restroom — Westminster/Windsor",
+    coordinates: [-77.45650, 37.59250],
+    label: "Restroom — Windsor/Stanhope",
   },
   // Merch / Info
   {
