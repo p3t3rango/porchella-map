@@ -751,7 +751,7 @@ export const amenities: Amenity[] = [
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45680, 37.58850],
+    coordinates: [-77.45590, 37.58800],
     label: "Restroom — Fauquier/Nottoway",
   },
   {
@@ -775,8 +775,8 @@ export const amenities: Amenity[] = [
   {
     id: "potty-5",
     type: "porta-potty",
-    coordinates: [-77.45650, 37.59250],
-    label: "Restroom — Windsor/Stanhope",
+    coordinates: [-77.45680, 37.59350],
+    label: "Restroom — Westminster near Newport",
   },
   {
     id: "potty-6",
