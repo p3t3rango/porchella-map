@@ -751,8 +751,8 @@ export const amenities: Amenity[] = [
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45670, 37.58830],
-    label: "Restroom — Nottoway/Fauquier",
+    coordinates: [-77.45680, 37.58850],
+    label: "Restroom — Fauquier/Nottoway",
   },
   {
     id: "potty-2",
@@ -763,8 +763,8 @@ export const amenities: Amenity[] = [
   {
     id: "potty-3",
     type: "porta-potty",
-    coordinates: [-77.45585, 37.58623],
-    label: "Restroom — Greycourt near Newport",
+    coordinates: [-77.45700, 37.58625],
+    label: "Restroom — Greycourt Ave",
   },
   {
     id: "potty-4",
@@ -777,6 +777,12 @@ export const amenities: Amenity[] = [
     type: "porta-potty",
     coordinates: [-77.45650, 37.59250],
     label: "Restroom — Windsor/Stanhope",
+  },
+  {
+    id: "potty-6",
+    type: "porta-potty",
+    coordinates: [-77.45340, 37.58630],
+    label: "Restroom — near River City Taiko",
   },
   // Merch / Info
   {
