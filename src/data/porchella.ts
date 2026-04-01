@@ -775,8 +775,8 @@ export const amenities: Amenity[] = [
   {
     id: "potty-5",
     type: "porta-potty",
-    coordinates: [-77.45680, 37.59350],
-    label: "Restroom — Westminster near Newport",
+    coordinates: [-77.45580, 37.59370],
+    label: "Restroom — Westminster Ave",
   },
   {
     id: "potty-6",
