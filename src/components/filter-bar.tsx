@@ -51,7 +51,7 @@ export function FilterBar({
             placeholder="Search bands..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="pl-8 pr-8 h-9 text-sm"
+            className="pl-8 pr-8 h-11 text-sm"
             aria-label="Search bands by name or genre"
           />
           {searchQuery && (
@@ -67,7 +67,7 @@ export function FilterBar({
         <select
           value={selectedGenre ?? ""}
           onChange={(e) => onGenreChange(e.target.value || null)}
-          className="h-9 rounded-md border bg-background px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-11 rounded-md border bg-background px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Filter by genre"
         >
           <option value="">All genres</option>
@@ -99,6 +99,7 @@ export function FilterBar({
                 await navigator.share({ title: "My Porchella 2026 Lineup", url: shareURL });
               } else {
                 await navigator.clipboard.writeText(shareURL);
+                alert("Link copied to clipboard!");
               }
             }}
             aria-label="Share your favorites list"

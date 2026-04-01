@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { MapPin, Clock, Heart } from "lucide-react";
+import { memo } from "react";
 import { Badge } from "@/components/ui/badge";
 import type { Band, Venue } from "@/data/porchella";
 import { TIME_SLOT_LABELS, type TimeSlot } from "@/lib/time";
@@ -17,7 +18,7 @@ type BandCardProps = {
   onClick: () => void;
 };
 
-export function BandCard({
+export const BandCard = memo(function BandCard({
   band,
   venue,
   timeSlot,
@@ -95,4 +96,4 @@ export function BandCard({
       </button>
     </div>
   );
-}
+});

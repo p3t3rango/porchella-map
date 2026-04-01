@@ -75,7 +75,7 @@ export function TimeSelector({
               aria-label={`${TIME_SLOT_LABELS[slot]}${isNow ? ", currently playing" : ""}`}
               onClick={() => onSelectSlot(slot)}
               className={`
-                relative flex-shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium
+                relative flex-shrink-0 rounded-full px-3.5 py-2 text-sm font-medium min-h-[44px]
                 transition-all duration-150 flex items-center gap-1.5
                 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
                 ${

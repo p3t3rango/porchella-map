@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { Music } from "lucide-react";
 
 type VenueMarkerProps = {
@@ -10,7 +11,7 @@ type VenueMarkerProps = {
   color?: string; // time-slot color for "all shows" view
 };
 
-export function VenueMarker({
+export const VenueMarker = memo(function VenueMarker({
   isActive,
   isSelected,
   bandName,
@@ -20,7 +21,7 @@ export function VenueMarker({
   // When a custom color is provided (all-shows mode), use it for the background
   const customStyle = color
     ? { backgroundColor: color, borderColor: color, minWidth: 32, minHeight: 32 }
-    : { minWidth: isSelected ? 40 : isActive ? 32 : 24, minHeight: isSelected ? 40 : isActive ? 32 : 24 };
+    : { minWidth: isSelected ? 40 : 32, minHeight: isSelected ? 40 : 32 };
 
   return (
     <button
@@ -50,4 +51,4 @@ export function VenueMarker({
       )}
     </button>
   );
-}
+});

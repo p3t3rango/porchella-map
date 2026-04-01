@@ -104,7 +104,7 @@ export function BandDetailSheet({
               height={500}
               className="w-full h-auto max-h-[35vh] object-contain"
               sizes="(max-width: 768px) 100vw, 600px"
-              priority
+              loading="lazy"
             />
           </div>
         )}

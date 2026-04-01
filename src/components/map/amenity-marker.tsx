@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { UtensilsCrossed, Toilet, ShoppingBag, Info } from "lucide-react";
 import type { AmenityType } from "@/data/porchella";
 
@@ -23,7 +24,7 @@ type AmenityMarkerProps = {
   onClick?: () => void;
 };
 
-export function AmenityMarker({ type, label, onClick }: AmenityMarkerProps) {
+export const AmenityMarker = memo(function AmenityMarker({ type, label, onClick }: AmenityMarkerProps) {
   const Icon = icons[type];
   return (
     <button
@@ -38,4 +39,4 @@ export function AmenityMarker({ type, label, onClick }: AmenityMarkerProps) {
       </span>
     </button>
   );
-}
+});
