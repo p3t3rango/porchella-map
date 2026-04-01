@@ -757,7 +757,7 @@ export const amenities: Amenity[] = [
   {
     id: "potty-2",
     type: "porta-potty",
-    coordinates: [-77.45268, 37.59203],
+    coordinates: [-77.45300, 37.59203],
     label: "Restroom — Stanhope near Brook Rd",
   },
   {
