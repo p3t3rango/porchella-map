@@ -34,10 +34,24 @@ const MAX_BOUNDS: [number, number, number, number] = [
   -77.49, 37.56, -77.42, 37.62,
 ];
 
-const STREET_CLOSURE_STYLE: LineLayerSpecification["paint"] = {
+const CLOSURE_CLOSED_STYLE: LineLayerSpecification["paint"] = {
   "line-color": "#ef4444",
   "line-width": 4,
   "line-opacity": 0.4,
+  "line-dasharray": [2, 2],
+};
+
+const CLOSURE_THRU_STYLE: LineLayerSpecification["paint"] = {
+  "line-color": "#f97316",
+  "line-width": 4,
+  "line-opacity": 0.5,
+  "line-dasharray": [3, 2],
+};
+
+const CLOSURE_CAUTION_STYLE: LineLayerSpecification["paint"] = {
+  "line-color": "#eab308",
+  "line-width": 4,
+  "line-opacity": 0.5,
   "line-dasharray": [2, 2],
 };
 
@@ -104,17 +118,53 @@ export function PorchellaMap({
     [activePerformances]
   );
 
-  const closureGeoJSON = useMemo(
+  const closedGeoJSON = useMemo(
     () => ({
       type: "FeatureCollection" as const,
-      features: streetClosures.map((c) => ({
-        type: "Feature" as const,
-        properties: { id: c.id, description: c.description },
-        geometry: {
-          type: "LineString" as const,
-          coordinates: c.coordinates,
-        },
-      })),
+      features: streetClosures
+        .filter((c) => c.type === "closed")
+        .map((c) => ({
+          type: "Feature" as const,
+          properties: { id: c.id, description: c.description },
+          geometry: {
+            type: "LineString" as const,
+            coordinates: c.coordinates,
+          },
+        })),
+    }),
+    []
+  );
+
+  const cautionGeoJSON = useMemo(
+    () => ({
+      type: "FeatureCollection" as const,
+      features: streetClosures
+        .filter((c) => c.type === "caution")
+        .map((c) => ({
+          type: "Feature" as const,
+          properties: { id: c.id, description: c.description },
+          geometry: {
+            type: "LineString" as const,
+            coordinates: c.coordinates,
+          },
+        })),
+    }),
+    []
+  );
+
+  const thruGeoJSON = useMemo(
+    () => ({
+      type: "FeatureCollection" as const,
+      features: streetClosures
+        .filter((c) => c.type === "thru-traffic")
+        .map((c) => ({
+          type: "Feature" as const,
+          properties: { id: c.id, description: c.description },
+          geometry: {
+            type: "LineString" as const,
+            coordinates: c.coordinates,
+          },
+        })),
     }),
     []
   );
@@ -147,13 +197,29 @@ export function PorchellaMap({
 
         {/* Street closures */}
         {mapLoaded && (
-          <Source id="street-closures" type="geojson" data={closureGeoJSON}>
-            <Layer
-              id="street-closures-line"
-              type="line"
-              paint={STREET_CLOSURE_STYLE}
-            />
-          </Source>
+          <>
+            <Source id="street-closures-closed" type="geojson" data={closedGeoJSON}>
+              <Layer
+                id="closures-closed-line"
+                type="line"
+                paint={CLOSURE_CLOSED_STYLE}
+              />
+            </Source>
+            <Source id="street-closures-thru" type="geojson" data={thruGeoJSON}>
+              <Layer
+                id="closures-thru-line"
+                type="line"
+                paint={CLOSURE_THRU_STYLE}
+              />
+            </Source>
+            <Source id="street-closures-caution" type="geojson" data={cautionGeoJSON}>
+              <Layer
+                id="closures-caution-line"
+                type="line"
+                paint={CLOSURE_CAUTION_STYLE}
+              />
+            </Source>
+          </>
         )}
 
         {/* Venue markers */}

@@ -60,6 +60,7 @@ export type FoodTruck = {
 export type StreetClosure = {
   id: string;
   street: string;
+  type: "closed" | "thru-traffic" | "caution";
   description: string;
   startTime: string;
   endTime: string;
@@ -479,6 +480,66 @@ export const bands: Band[] = [
   },
 ];
 
+// ─── Genre Categories (for filtering) ───────────────────────────────
+
+export const GENRE_CATEGORIES = [
+  "Rock",
+  "Indie/Alternative",
+  "Punk/Garage",
+  "Dad Alt/Rock",
+  "Americana/Roots",
+  "Bluegrass/Folk",
+  "Jazz/Soul",
+  "Psych/Funk/Prog",
+  "Shoegaze",
+  "World/Traditional",
+] as const;
+
+export type GenreCategory = (typeof GENRE_CATEGORIES)[number];
+
+const BAND_CATEGORY: Record<string, GenreCategory> = {
+  "river-city-taiko": "World/Traditional",
+  "tiny-lights": "Indie/Alternative",
+  "4la7la": "Indie/Alternative",
+  "cary-street-ramblers": "Bluegrass/Folk",
+  "burns-burly-west": "Indie/Alternative",
+  "sad-biscuit-jones": "Dad Alt/Rock",
+  "sister-planet": "Psych/Funk/Prog",
+  "brookhouse": "Jazz/Soul",
+  "lagoon-musique": "World/Traditional",
+  "tarrant": "Americana/Roots",
+  "the-high-frequencies": "Rock",
+  "hard-pill-to-swallow": "Rock",
+  "the-approach": "Rock",
+  "the-rhythmasters": "Jazz/Soul",
+  "ultrasuede": "Punk/Garage",
+  "the-lonely-teardrops": "Punk/Garage",
+  "kozy-cats": "Jazz/Soul",
+  "the-blue-guitar": "Jazz/Soul",
+  "floodwall": "Shoegaze",
+  "bellevue-bon-temps": "World/Traditional",
+  "crack-fox": "Punk/Garage",
+  "sleepy-joes-distortion-unit": "Rock",
+  "night-idea": "Shoegaze",
+  "half-lit": "Bluegrass/Folk",
+  "cheap-comfort": "Americana/Roots",
+  "quasimojo": "Rock",
+  "wrong-worshippers": "Punk/Garage",
+  "leslie-and-the-dots": "Psych/Funk/Prog",
+  "rosies-irish-session": "World/Traditional",
+  "deporch-mode": "Dad Alt/Rock",
+  "horsehead": "Americana/Roots",
+  "the-atkinsons": "Americana/Roots",
+  "river-city-band": "Bluegrass/Folk",
+  "prabir-trio": "Psych/Funk/Prog",
+  "the-jangling-reinharts": "Americana/Roots",
+  "lazlo": "Dad Alt/Rock",
+};
+
+export function getBandCategory(bandId: string): GenreCategory {
+  return BAND_CATEGORY[bandId] ?? "Rock";
+}
+
 // ─── Venues ──────────────────────────────────────────────────────────
 
 export const venues: Venue[] = [
@@ -836,14 +897,15 @@ export const foodTrucks: FoodTruck[] = [
 // ─── Street Closures ─────────────────────────────────────────────────
 
 export const streetClosures: StreetClosure[] = [
+  // ─── RC (Road Closed) ─────────────────────────────────
   {
     id: "fauquier-main",
     street: "Fauquier Ave",
+    type: "closed",
     description: "Fauquier Ave (Laburnum to Bellevue)",
     startTime: "11:30 AM",
     endTime: "6:30 PM",
     coordinates: [
-      // NW end — near Bellevue Ave (from OpenStreetMap road geometry)
       [-77.45750, 37.59081],
       [-77.45709, 37.58986],
       [-77.45691, 37.58943],
@@ -852,12 +914,167 @@ export const streetClosures: StreetClosure[] = [
       [-77.45539, 37.58769],
       [-77.45418, 37.58683],
       [-77.45413, 37.58679],
-      // Road bends here — angle changes
       [-77.45307, 37.58597],
       [-77.45293, 37.58586],
       [-77.45184, 37.58501],
-      // SE end — at Laburnam Ave
       [-77.45111, 37.58451],
+    ],
+  },
+  {
+    id: "westminster-rc",
+    street: "Westminster Ave",
+    type: "closed",
+    description: "Westminster Ave (Newport Dr to Brook Rd)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45692, 37.59375], // Newport & Westminster
+      [-77.45630, 37.59379],
+      [-77.45363, 37.59396],
+      [-77.45302, 37.59400], // Brook & Westminster
+    ],
+  },
+  {
+    id: "stanhope-east-rc",
+    street: "Stanhope Ave",
+    type: "closed",
+    description: "Stanhope Ave (Newport Dr to Brook Rd)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45632, 37.59187], // Newport & Stanhope
+      [-77.45328, 37.59200],
+      [-77.45253, 37.59203], // Brook & Stanhope
+    ],
+  },
+  {
+    id: "nottoway-west-caution",
+    street: "Nottoway Ave",
+    type: "caution",
+    description: "Nottoway Ave (Fauquier Ave to MacArthur Ave)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      // OSM Way 6040387 — diagonal section from Fauquier junction west
+      [-77.45640, 37.58862],
+      [-77.45697, 37.58816],
+      [-77.45719, 37.58806],
+      [-77.45810, 37.58803],
+      [-77.45818, 37.58819], // MacArthur area
+    ],
+  },
+  {
+    id: "claremont-west-rc",
+    street: "Claremont Ave",
+    type: "closed",
+    description: "Claremont Ave (MacArthur to Newport Dr)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45813, 37.58710], // MacArthur area
+      [-77.45600, 37.58716],
+      [-77.45591, 37.58717], // Newport & Claremont
+    ],
+  },
+  {
+    id: "claremont-east-rc",
+    street: "Claremont Ave",
+    type: "closed",
+    description: "Claremont Ave (Lamont St to Fauquier Ave)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45368, 37.58815], // Lamont & Claremont
+      [-77.45466, 37.58812],
+      [-77.45472, 37.58812],
+      [-77.45476, 37.58810],
+      [-77.45481, 37.58808],
+      [-77.45487, 37.58802],
+      [-77.45523, 37.58774], // Fauquier & Claremont
+    ],
+  },
+  {
+    id: "greycourt-west-rc",
+    street: "Greycourt Ave",
+    type: "closed",
+    description: "Greycourt Ave (Newport Dr to MacArthur Ave)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45584, 37.58624], // Newport & Greycourt
+      [-77.45808, 37.58618], // MacArthur area
+    ],
+  },
+  {
+    id: "mt-vernon-rc",
+    street: "Mount Vernon St",
+    type: "closed",
+    description: "Mount Vernon St (Bellevue to Nottoway)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.46140, 37.59050],
+      [-77.46140, 37.58886],
+      [-77.46142, 37.58811],
+    ],
+  },
+
+  // ─── TTT (Restricted To Thru Traffic) ──────────────────
+  {
+    id: "stanhope-west-ttt",
+    street: "Stanhope Ave",
+    type: "thru-traffic",
+    description: "Stanhope Ave (west section — thru traffic restricted)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45757, 37.59182],
+      [-77.45632, 37.59187], // Newport & Stanhope
+    ],
+  },
+  {
+    id: "nottoway-east-ttt",
+    street: "Nottoway Ave",
+    type: "thru-traffic",
+    description: "Nottoway Ave (Newport Dr to Lamont St — thru traffic restricted)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45594, 37.58902], // Newport & Nottoway
+      [-77.45372, 37.58908], // Lamont & Nottoway
+    ],
+  },
+
+  // ─── Caution ───────────────────────────────────────────
+  {
+    id: "stanhope-west-caution",
+    street: "Stanhope Ave",
+    type: "caution",
+    description: "Stanhope Ave (MacArthur to Fauquier Ave)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      // OSM Way 6040502 — western curve toward Fauquier
+      [-77.45757, 37.59182],
+      [-77.45772, 37.59179],
+      [-77.45789, 37.59173],
+      [-77.45838, 37.59142],
+    ],
+  },
+  {
+    id: "greycourt-east-caution",
+    street: "Greycourt Ave",
+    type: "caution",
+    description: "Greycourt Ave (Brook Rd to Fauquier Ave)",
+    startTime: "11:30 AM",
+    endTime: "6:30 PM",
+    coordinates: [
+      [-77.45175, 37.58728], // Brook & Greycourt
+      [-77.45238, 37.58726],
+      [-77.45353, 37.58723],
+      [-77.45365, 37.58719],
+      [-77.45408, 37.58683],
+      [-77.45413, 37.58679], // Fauquier & Greycourt
     ],
   },
 ];
@@ -903,14 +1120,15 @@ export function getPerformanceWithDetails(perf: Performance) {
 }
 
 export function getAllGenres(): string[] {
-  const genres = new Set(bands.map((b) => b.genre));
-  return Array.from(genres).sort();
+  return [...GENRE_CATEGORIES];
 }
 
 export function searchBands(query: string): Band[] {
   const q = query.toLowerCase();
   return bands.filter(
     (b) =>
-      b.name.toLowerCase().includes(q) || b.genre.toLowerCase().includes(q)
+      b.name.toLowerCase().includes(q) ||
+      b.genre.toLowerCase().includes(q) ||
+      getBandCategory(b.id).toLowerCase().includes(q)
   );
 }

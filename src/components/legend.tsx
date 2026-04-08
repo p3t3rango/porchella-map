@@ -7,7 +7,9 @@ const items = [
   { icon: UtensilsCrossed, label: "Food trucks", color: "bg-amber-500 text-white" },
   { icon: Toilet, label: "Restrooms", color: "bg-blue-500 text-white" },
   { icon: ShoppingBag, label: "Merch / Info", color: "bg-pink-500 text-white" },
-  { icon: Minus, label: "Street closure", color: "bg-red-400 text-white" },
+  { icon: Minus, label: "Road closed", color: "bg-red-400 text-white" },
+  { icon: Minus, label: "Thru traffic restricted", color: "bg-orange-400 text-white" },
+  { icon: Minus, label: "Caution", color: "bg-yellow-400 text-white" },
 ];
 
 export function Legend() {

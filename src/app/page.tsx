@@ -10,6 +10,7 @@ import { Legend } from "@/components/legend";
 import {
   performances,
   getBand,
+  getBandCategory,
   getVenue,
   sponsors,
   type Performance,
@@ -84,8 +85,9 @@ export default function Home() {
       const matchesSearch =
         !q ||
         band.name.toLowerCase().includes(q) ||
-        band.genre.toLowerCase().includes(q);
-      const matchesGenre = !selectedGenre || band.genre === selectedGenre;
+        band.genre.toLowerCase().includes(q) ||
+        getBandCategory(band.id).toLowerCase().includes(q);
+      const matchesGenre = !selectedGenre || getBandCategory(band.id) === selectedGenre;
       const matchesFavorites = !showFavorites || favorites.has(band.id);
       if (matchesSearch && matchesGenre && matchesFavorites) ids.add(band.id);
     });
