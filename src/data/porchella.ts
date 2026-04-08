@@ -948,9 +948,9 @@ export const streetClosures: StreetClosure[] = [
     ],
   },
   {
-    id: "nottoway-west-caution",
+    id: "nottoway-west-rc",
     street: "Nottoway Ave",
-    type: "caution",
+    type: "closed",
     description: "Nottoway Ave (Fauquier Ave to MacArthur Ave)",
     startTime: "11:30 AM",
     endTime: "6:30 PM",
@@ -1047,9 +1047,9 @@ export const streetClosures: StreetClosure[] = [
 
   // ─── Caution ───────────────────────────────────────────
   {
-    id: "stanhope-west-caution",
+    id: "stanhope-west-rc",
     street: "Stanhope Ave",
-    type: "caution",
+    type: "closed",
     description: "Stanhope Ave (MacArthur to Fauquier Ave)",
     startTime: "11:30 AM",
     endTime: "6:30 PM",
@@ -1062,9 +1062,9 @@ export const streetClosures: StreetClosure[] = [
     ],
   },
   {
-    id: "greycourt-east-caution",
+    id: "greycourt-east-rc",
     street: "Greycourt Ave",
-    type: "caution",
+    type: "closed",
     description: "Greycourt Ave (Brook Rd to Fauquier Ave)",
     startTime: "11:30 AM",
     endTime: "6:30 PM",
