@@ -883,11 +883,6 @@ export const foodTrucks: FoodTruck[] = [
     website: "https://moniquescrepes.com/menu-items/",
   },
   {
-    id: "braise-n-smoke",
-    name: "Braise N'Smoke",
-    website: "https://streetfoodfinder.com/BraiseNSmoke?tab=photos",
-  },
-  {
     id: "westrays-finest",
     name: "Westray's Finest",
     website: "https://www.bestfoodtrucks.com/truck/westray-s-finest-ice-cream/menu",
