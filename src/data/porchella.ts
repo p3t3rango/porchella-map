@@ -519,7 +519,7 @@ const BAND_CATEGORY: Record<string, GenreCategory> = {
   "floodwall": "Shoegaze",
   "bellevue-bon-temps": "World/Traditional",
   "crack-fox": "Punk/Garage",
-  "sleepy-joes-distortion-unit": "Rock",
+  "sleepy-joes-distortion-unit": "Punk/Garage",
   "night-idea": "Shoegaze",
   "half-lit": "Bluegrass/Folk",
   "cheap-comfort": "Americana/Roots",
