@@ -110,15 +110,16 @@ export function FilterBar({
         )}
         <button
           onClick={onToggleAllVenues}
+          aria-pressed={showAllVenues}
           aria-label={showAllVenues ? "Show current time slot" : "Show all time slots on map"}
           className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors flex-shrink-0 ${
             showAllVenues
-              ? "bg-primary/15 text-primary border border-primary/30"
-              : "bg-secondary text-secondary-foreground hover:bg-accent"
+              ? "bg-primary text-primary-foreground border border-primary shadow-sm"
+              : "bg-secondary text-secondary-foreground hover:bg-accent border border-transparent"
           }`}
         >
-          <Eye className="h-3 w-3" />
-          All shows
+          <Eye className={`h-3 w-3 ${showAllVenues ? "fill-current" : ""}`} />
+          {showAllVenues ? "All shows · ON" : "All shows"}
         </button>
         <button
           onClick={onToggleRestrooms}
