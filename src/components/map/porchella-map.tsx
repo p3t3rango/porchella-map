@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Map, { Marker, Source, Layer, NavigationControl } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { MapRef } from "react-map-gl/maplibre";
@@ -20,14 +20,34 @@ import {
 } from "@/data/porchella";
 import type { TimeSlot } from "@/lib/time";
 
-// Bellevue neighborhood center — centered on the venue cluster
+// Bellevue neighborhood — fallback center before fitBounds runs on load.
+// Precomputed from the bounding box of all venues + amenities.
 const INITIAL_VIEW = {
-  longitude: -77.4555,
-  latitude: 37.5880,
-  zoom: 15.5,
+  longitude: -77.4568,
+  latitude: 37.5896,
+  zoom: 14.8,
   pitch: 0,
   bearing: 0,
 };
+
+// Bounding box of the event area (all venues + amenities) for fitBounds on load.
+const EVENT_BOUNDS: [[number, number], [number, number]] = (() => {
+  const points = [
+    ...venues.map((v) => v.coordinates),
+    ...amenities.map((a) => a.coordinates),
+  ];
+  let west = Infinity, south = Infinity, east = -Infinity, north = -Infinity;
+  for (const [lng, lat] of points) {
+    if (lng < west) west = lng;
+    if (lng > east) east = lng;
+    if (lat < south) south = lat;
+    if (lat > north) north = lat;
+  }
+  return [
+    [west, south],
+    [east, north],
+  ];
+})();
 
 // Bounds to constrain panning — wide enough to scroll freely at min zoom
 const MAX_BOUNDS: [number, number, number, number] = [
@@ -91,6 +111,14 @@ export function PorchellaMap({
 }: PorchellaMapProps) {
   const mapRef = useRef<MapRef>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  // Edit mode: toggled via ?edit=1 in the URL. Enables drag on amenity
+  // markers and shows an overlay with copy-able JSON of their coordinates.
+  const [editMode, setEditMode] = useState(false);
+  const [editedCoords, setEditedCoords] = useState<Record<string, [number, number]>>({});
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setEditMode(new URLSearchParams(window.location.search).get("edit") === "1");
+  }, []);
   const prefersReducedMotion =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -185,12 +213,23 @@ export function PorchellaMap({
         ref={mapRef}
         initialViewState={INITIAL_VIEW}
         maxBounds={MAX_BOUNDS}
-        minZoom={14}
+        minZoom={13.5}
         maxZoom={18}
         mapStyle={isDark ? MAP_STYLES.dark : MAP_STYLES.light}
         attributionControl={false}
         cooperativeGestures={true}
-        onLoad={() => setMapLoaded(true)}
+        onLoad={() => {
+          setMapLoaded(true);
+          // Mobile: bottom drawer covers ~45% of viewport at default snap,
+          // so pad bottom by that much so the fit falls in the visible area.
+          const isMobile = window.innerWidth < 1024;
+          const bottomPad = isMobile ? Math.round(window.innerHeight * 0.45) + 16 : 40;
+          mapRef.current?.fitBounds(EVENT_BOUNDS, {
+            padding: { top: 24, bottom: bottomPad, left: 24, right: 24 },
+            duration: 0,
+            linear: true,
+          });
+        }}
         reuseMaps
       >
         <NavigationControl position="top-right" showCompass={false} />
@@ -261,21 +300,95 @@ export function PorchellaMap({
             if (a.type === "food-truck" && !showFoodTrucks) return false;
             return true;
           })
-          .map((amenity) => (
-          <Marker
-            key={amenity.id}
-            longitude={amenity.coordinates[0]}
-            latitude={amenity.coordinates[1]}
-            anchor="center"
-          >
-            <AmenityMarker type={amenity.type} label={amenity.label} onClick={() => onAmenityClick?.(amenity)} />
-          </Marker>
-        ))}
+          .map((amenity) => {
+            const coords = editedCoords[amenity.id] ?? amenity.coordinates;
+            return (
+              <Marker
+                key={amenity.id}
+                longitude={coords[0]}
+                latitude={coords[1]}
+                anchor="center"
+                draggable={editMode}
+                onDragEnd={(e) =>
+                  setEditedCoords((prev) => ({
+                    ...prev,
+                    [amenity.id]: [e.lngLat.lng, e.lngLat.lat],
+                  }))
+                }
+              >
+                <AmenityMarker
+                  type={amenity.type}
+                  label={amenity.label}
+                  onClick={editMode ? undefined : () => onAmenityClick?.(amenity)}
+                />
+              </Marker>
+            );
+          })}
       </Map>
+
+      {editMode && (
+        <EditModeOverlay
+          amenities={amenities}
+          editedCoords={editedCoords}
+          onReset={() => setEditedCoords({})}
+        />
+      )}
 
       {/* Live region for screen readers */}
       <div className="sr-only" role="status" aria-live="polite">
         {activePerformances.length} performances showing on map
+      </div>
+    </div>
+  );
+}
+
+type EditOverlayProps = {
+  amenities: Amenity[];
+  editedCoords: Record<string, [number, number]>;
+  onReset: () => void;
+};
+
+function EditModeOverlay({ amenities, editedCoords, onReset }: EditOverlayProps) {
+  const [copied, setCopied] = useState(false);
+  const snippet = useMemo(() => {
+    const lines = amenities.map((a) => {
+      const [lng, lat] = editedCoords[a.id] ?? a.coordinates;
+      return `  { id: "${a.id}", type: "${a.type}", coordinates: [${lng.toFixed(5)}, ${lat.toFixed(5)}], label: ${JSON.stringify(a.label)} },`;
+    });
+    return `export const amenities: Amenity[] = [\n${lines.join("\n")}\n];`;
+  }, [amenities, editedCoords]);
+  const editedCount = Object.keys(editedCoords).length;
+  return (
+    <div className="absolute right-3 top-3 z-10 w-[360px] max-w-[90vw] rounded-lg border bg-background/95 p-3 shadow-lg backdrop-blur">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-sm font-semibold">Edit mode — drag amenity pins</span>
+        <span className="text-xs text-muted-foreground">{editedCount} moved</span>
+      </div>
+      <textarea
+        readOnly
+        value={snippet}
+        className="h-40 w-full resize-none rounded border bg-muted/40 p-2 font-mono text-[11px]"
+      />
+      <div className="mt-2 flex gap-2">
+        <button
+          type="button"
+          onClick={async () => {
+            await navigator.clipboard.writeText(snippet);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1500);
+          }}
+          className="rounded-md border px-3 py-1.5 text-xs font-medium hover:bg-accent"
+        >
+          {copied ? "Copied!" : "Copy JSON"}
+        </button>
+        <button
+          type="button"
+          onClick={onReset}
+          className="rounded-md border px-3 py-1.5 text-xs font-medium hover:bg-accent"
+          disabled={editedCount === 0}
+        >
+          Reset
+        </button>
       </div>
     </div>
   );

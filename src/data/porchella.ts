@@ -41,7 +41,7 @@ export type Performance = {
   timeSlot: TimeSlot;
 };
 
-export type AmenityType = "food-truck" | "porta-potty" | "merch" | "info";
+export type AmenityType = "food-truck" | "porta-potty" | "merch" | "info" | "sponsor" | "trash";
 
 export type Amenity = {
   id: string;
@@ -795,24 +795,48 @@ export const performances: Performance[] = [
 // ─── Amenities ───────────────────────────────────────────────────────
 
 export const amenities: Amenity[] = [
-  // Food trucks — on Fauquier Ave between Claremont and Greycourt
+  // Food trucks — positions placed via the in-app drag editor (?edit=1).
   {
     id: "food-1",
     type: "food-truck",
-    coordinates: [-77.45500, 37.58750],
-    label: "Food Trucks — Fauquier near Claremont",
+    coordinates: [-77.45600, 37.58824],
+    label: "Food Truck — Fauquier Ave",
   },
   {
     id: "food-2",
     type: "food-truck",
-    coordinates: [-77.45460, 37.58730],
-    label: "Food Trucks — Fauquier near Greycourt",
+    coordinates: [-77.45589, 37.58815],
+    label: "Food Truck — Fauquier Ave",
+  },
+  {
+    id: "food-3",
+    type: "food-truck",
+    coordinates: [-77.45578, 37.58807],
+    label: "Food Truck — Fauquier Ave",
+  },
+  {
+    id: "food-4",
+    type: "food-truck",
+    coordinates: [-77.45524, 37.58764],
+    label: "Food Truck — Fauquier Ave",
+  },
+  {
+    id: "food-5",
+    type: "food-truck",
+    coordinates: [-77.45510, 37.58754],
+    label: "Food Truck — Fauquier Ave",
+  },
+  {
+    id: "food-6",
+    type: "food-truck",
+    coordinates: [-77.45497, 37.58744],
+    label: "Food Truck — Fauquier Ave",
   },
   // Porta-potties — positions from official PDF flyer map
   {
     id: "potty-1",
     type: "porta-potty",
-    coordinates: [-77.45590, 37.58800],
+    coordinates: [-77.45634, 37.58842],
     label: "Restroom — Fauquier/Nottoway",
   },
   {
@@ -842,15 +866,34 @@ export const amenities: Amenity[] = [
   {
     id: "potty-6",
     type: "porta-potty",
-    coordinates: [-77.45340, 37.58630],
+    coordinates: [-77.45426, 37.58681],
     label: "Restroom — near River City Taiko",
   },
-  // Merch / Info
+  // BCA Merch & Sponsor tents — placed via ?edit=1 drag editor.
   {
     id: "merch-1",
     type: "merch",
-    coordinates: [-77.45660, 37.58870],
-    label: "BCA Tent — Merch & Info",
+    coordinates: [-77.45546, 37.58774],
+    label: "BCA Merch",
+  },
+  {
+    id: "sponsor-1",
+    type: "sponsor",
+    coordinates: [-77.45560, 37.58784],
+    label: "Sponsor Tent",
+  },
+  // Trash & recycling — at the NW and SE ends of the Fauquier event zone.
+  {
+    id: "trash-1",
+    type: "trash",
+    coordinates: [-77.45644, 37.58850],
+    label: "Trash & Recycling — Fauquier/Nottoway",
+  },
+  {
+    id: "trash-2",
+    type: "trash",
+    coordinates: [-77.45444, 37.58693],
+    label: "Trash & Recycling — Fauquier (east end)",
   },
 ];
 

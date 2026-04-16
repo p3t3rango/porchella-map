@@ -1,12 +1,14 @@
 "use client";
 
-import { Music, UtensilsCrossed, Toilet, ShoppingBag, Minus } from "lucide-react";
+import { Music, UtensilsCrossed, Toilet, ShoppingBag, Megaphone, Trash2, Minus } from "lucide-react";
 
 const items = [
   { icon: Music, label: "Active venue", color: "bg-primary text-primary-foreground" },
   { icon: UtensilsCrossed, label: "Food trucks", color: "bg-amber-500 text-white" },
   { icon: Toilet, label: "Restrooms", color: "bg-blue-500 text-white" },
-  { icon: ShoppingBag, label: "Merch / Info", color: "bg-pink-500 text-white" },
+  { icon: ShoppingBag, label: "BCA Merch", color: "bg-pink-500 text-white" },
+  { icon: Megaphone, label: "Sponsor tent", color: "bg-purple-500 text-white" },
+  { icon: Trash2, label: "Trash & recycling", color: "bg-slate-500 text-white" },
   { icon: Minus, label: "Road closed", color: "bg-red-400 text-white" },
   { icon: Minus, label: "Thru traffic restricted", color: "bg-orange-400 text-white" },
   { icon: Minus, label: "Caution", color: "bg-yellow-400 text-white" },

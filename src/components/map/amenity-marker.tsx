@@ -1,7 +1,7 @@
 "use client";
 
 import { memo } from "react";
-import { UtensilsCrossed, Toilet, ShoppingBag, Info } from "lucide-react";
+import { UtensilsCrossed, Toilet, ShoppingBag, Info, Megaphone, Trash2 } from "lucide-react";
 import type { AmenityType } from "@/data/porchella";
 
 const icons: Record<AmenityType, typeof UtensilsCrossed> = {
@@ -9,6 +9,8 @@ const icons: Record<AmenityType, typeof UtensilsCrossed> = {
   "porta-potty": Toilet,
   merch: ShoppingBag,
   info: Info,
+  sponsor: Megaphone,
+  trash: Trash2,
 };
 
 const colors: Record<AmenityType, string> = {
@@ -16,6 +18,8 @@ const colors: Record<AmenityType, string> = {
   "porta-potty": "bg-blue-500 border-blue-600 text-white",
   merch: "bg-pink-500 border-pink-600 text-white",
   info: "bg-green-500 border-green-600 text-white",
+  sponsor: "bg-purple-500 border-purple-600 text-white",
+  trash: "bg-slate-500 border-slate-600 text-white",
 };
 
 type AmenityMarkerProps = {
