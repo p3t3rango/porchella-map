@@ -209,7 +209,21 @@ export default function Home() {
       </div>
 
       {/* Sponsor footer */}
-      <footer className="border-t px-3 py-2 text-center text-[10px] text-muted-foreground">
+      <footer className="relative border-t px-3 py-2 text-center text-[10px] text-muted-foreground">
+        <a
+          href="https://peterango.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Built by Pete Rango"
+          className="absolute left-2 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/peterango-logo.png"
+            alt="Pete Rango"
+            className="h-4 w-auto invert dark:invert-0"
+          />
+        </a>
         <span>Sponsored by </span>
         {sponsors.map((s, i) => (
           <span key={s.name}>
