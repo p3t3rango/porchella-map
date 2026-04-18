@@ -215,7 +215,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Built by Pete Rango"
-          className="absolute left-2 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity"
+          className="absolute left-3 top-1/2 -translate-y-1/2 p-1 opacity-70 hover:opacity-100 transition-opacity"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
